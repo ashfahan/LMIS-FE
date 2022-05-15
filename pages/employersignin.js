@@ -35,7 +35,7 @@ export default function Signup() {
           sessionStorage.setItem('userToken', response.token)
           sessionStorage.setItem('userType', 0)
           sessionStorage.setItem('permissions', JSON.stringify(response.permissions))
-          router.push('/Password')
+          router.push('/EmployerDashboard')
           setSignin(true)
         } else {
           addToast('User not found or Email or password does not match.', {
