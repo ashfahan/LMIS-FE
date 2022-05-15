@@ -1,0 +1,47 @@
+.trashIcon {
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.tableStyles {
+  overflow: hidden;
+  flex-basis: 100%;
+  table {
+    border-radius: 6px;
+    border: 1px solid #e8e8e8;
+  }
+  thead tr th {
+    color: #bfbfbf;
+    background-color: #f5f5f5 !important;
+    padding: 5px 8px !important;
+  }
+  ::before {
+    display: none;
+  }
+}
+
+.cityTable,
+.degreeTable,
+.genderTable,
+.companyTable,
+.jobTypetable,
+.industryTable,
+.educationTable,
+.experienceTable,
+.universityTable,
+.companyTypeTable {
+  display: flex;
+  flex-basis: 100%;
+}
+
+.editButton {
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  margin-right: 10px;
+}
+.actionContaienr {
+  display: flex;
+  align-items: center;
+}

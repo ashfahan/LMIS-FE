@@ -1,0 +1,59 @@
+.authWrapper {
+  max-width: 350px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.BiggerForms {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.salaryRange {
+  // position: absolute;
+  // right: 0;
+  // top: -30px;
+}
+
+.salaryRange:dir(rtl) {
+  right: 0;
+}
+
+.salaryRange:dir(ltr) {
+  left: 0;
+}
+
+.skiptodashboard {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #bfbfbf;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 540px) {
+  .authWrapper {
+    max-width: unset !important;
+    .fontSmHead {
+      font-size: 13px;
+    }
+    .fontSm {
+      font-size: 11px;
+    }
+    .recordAdditionBtn {
+      padding: 5px 10px;
+      font-size: 11px;
+    }
+    .profileImgContainer {
+      width: 60px !important;
+      height: 60px !important;
+    }
+    .pdfImgContainer {
+      width: 50px !important;
+      height: 50px !important;
+      min-width: unset !important;
+      min-height: unset !important;
+    }
+  }
+}

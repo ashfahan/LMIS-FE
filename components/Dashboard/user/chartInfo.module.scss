@@ -1,0 +1,43 @@
+.chartInfoMain {
+  flex-basis: 50%;
+  align-items: center;
+  ul {
+    margin-bottom: 20px;
+    li {
+      margin-bottom: 3px;
+      display: grid;
+      grid-template-columns: 100px auto;
+      // justify-content: space-between;
+      grid-gap: 5px;
+      .left {
+        display: inline-flex;
+        align-items: center;
+        span {
+          width: 10px;
+          height: 10px;
+          margin-right: 5px;
+          border-radius: 10px;
+        }
+        .dot1 {
+          background-color: #06d6a0;
+        }
+        .dot2 {
+          background-color: #ffad3d;
+        }
+        .dot3 {
+          background-color: #ef476f;
+        }
+      }
+      p {
+        margin: 0;
+      }
+      .right {
+        span {
+          background-color: #d3d3d3;
+          padding: 2px 0.5px;
+          margin: 0 4px;
+        }
+      }
+    }
+  }
+}

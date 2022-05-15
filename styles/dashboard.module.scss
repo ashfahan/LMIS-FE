@@ -1,0 +1,399 @@
+/*============= Global for Dashboard Page =============*/
+.dashJobCategoryTitle p {
+  font-size: 12px;
+  padding: 0 5px;
+  border-bottom: 1px solid #ffad3d;
+  a {
+    color: #bfbfbf;
+    float: right;
+  }
+}
+.searchTitles {
+  display: flex;
+  justify-content: center;
+  margin-top: 11px;
+  gap: 10px;
+}
+.profileUpdateBanner {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #f5b55b;
+  .leftIcon {
+    padding: 10px;
+  }
+  .textContainer {
+    flex: 1;
+    padding: 11px;
+    align-self: center;
+    background-color: #fae4c6;
+    p {
+      margin: 0;
+    }
+  }
+  .updateButton {
+    background-color: #f5b55b;
+    min-height: 44px !important;
+    border: none;
+  }
+}
+.dFlex {
+  display: flex;
+  flex-direction: row;
+}
+.alignItemCenter {
+  align-items: center;
+}
+.overLay:hover {
+  background-color: #ebf3ff;
+  cursor: pointer;
+}
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: 20px;
+  h3 {
+    margin: 0;
+  }
+}
+.gridContainer {
+  width: 100%;
+  border-radius: 6px;
+  padding: 0;
+  margin-bottom: 20px;
+  display: flex;
+  padding: 10px;
+}
+.dashJobsCardItem {
+  border-radius: 6px;
+  flex: 1;
+  // border: 1px solid #E8E8E8;
+  h4 {
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .heartIcon {
+      color: #ef476f;
+    }
+  }
+  p {
+    font-size: 12px;
+    margin-bottom: 8px;
+    span {
+      float: right;
+    }
+  }
+  a {
+    color: #bfbfbf;
+    font-size: 12px;
+  }
+}
+div.dot {
+  width: 4px;
+  height: 4px;
+  margin: 0 4px;
+  border-radius: 5px;
+  position: relative;
+  top: -2px;
+  display: inline-block;
+  background-color: #d9d9d9;
+}
+.backText {
+  font-size: 11px;
+}
+.empDashTopsList {
+  font-size: 12px;
+  padding-left: 15px;
+  list-style: none;
+  counter-reset: li;
+  margin-bottom: 50px;
+  li::before {
+    content: counter(li);
+    color: #bfbfbf;
+    display: inline-block;
+    width: 1.2em;
+    margin-left: -1em;
+  }
+  li {
+    counter-increment: li;
+    margin-bottom: 7px;
+    .iconUp,
+    .iconDown {
+      float: right;
+    }
+    .iconUp {
+      color: #27ae60;
+    }
+    .iconDown {
+      color: #eb5757;
+    }
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .recordAdditionBtn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  .jobPreferencesWrapper {
+    display: block !important;
+  }
+  .profileUpdateBanner {
+    flex-direction: column;
+    background-color: transparent;
+    .updateButton {
+      margin-top: 10px;
+    }
+  }
+}
+
+/*============= SideBar =============*/
+
+.dBoardSidebar,
+.dBoardSidebarActive {
+  background-color: #f5f5f5;
+  border-right: 1px solid #e8e8e8;
+  padding: 30px0;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  height: 100vh;
+  transition: all 0.25s;
+  .sidebarList {
+    background-color: white;
+    border-right: none !important;
+  }
+}
+.dBoardSidebarRtl,
+.dBoardSidebarActiveRtl {
+  background-color: #f5f5f5;
+  border-right: 1px solid #e8e8e8;
+  padding: 30px0;
+  position: sticky;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  transition: all 0.25s;
+  .sidebarList {
+    background-color: transparent !important;
+    border-right: none !important;
+  }
+}
+
+.dBoardSidebarActive {
+  left: -765%;
+}
+.dBoardSidebarActiveRtl {
+  right: -765%;
+}
+
+.sidebarToggleBtn {
+  display: none;
+}
+
+@media (max-width: 1049px) {
+  .dBoardSidebar,
+  .dBoardSidebarActive,
+  .dBoardSidebarRtl,
+  .dBoardSidebarActiveRtl {
+    position: absolute;
+    height: 100%;
+    padding-top: 2px;
+  }
+  .sidebarToggleBtn {
+    display: block;
+  }
+}
+
+/*============= Notification Bar =============*/
+.notificationBarMain {
+  height: 45px;
+  width: 100%;
+  display: block;
+}
+
+/*============= Center Column Main =============*/
+.dboardCenterCol {
+  padding: 20px 30px;
+  .sectionTitle {
+    font-size: 20px;
+    margin: 12px0 24px;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 15px;
+  }
+}
+.dBoardCol {
+  padding-top: 0 !important;
+}
+.employerJobTitles {
+  min-height: 185px;
+  padding-top: 30px;
+}
+.pt30 {
+  padding-top: 30px;
+}
+
+@media only screen and (max-width: 767px) {
+  .employerJobTitles {
+    min-height: unset;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .ptSm30 {
+    padding-top: 30px;
+  }
+  .pbSm30 {
+    padding-bottom: 30px;
+  }
+}
+
+/*============= Center Column Charts =============*/
+.dashChartsLeft,
+.dashChartsRight,
+.empDashChartsMain {
+  h3 {
+    font-size: 24px;
+    span {
+      float: right;
+      font-size: 14px;
+    }
+    sup {
+      font-size: 12px;
+      top: -12px;
+    }
+    .green {
+      color: #27ae60;
+    }
+  }
+}
+.red {
+  color: #eb5757 !important;
+}
+.dashChartsLeft {
+  margin-right: 10px;
+}
+.dashChartsRight {
+  margin-left: 10px;
+}
+
+/*============= Right Seach Box =============*/
+.searchJobsSelectMain {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 4px;
+  .searchJobsSelect {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 20px;
+    justify-content: flex-end;
+    margin-bottom: 25px;
+    a {
+      border: 1px solid #d9d9d9;
+      padding: 8px 15px;
+      display: inline-block;
+      border-radius: 4px;
+      font-size: 12px;
+      width: 135px;
+      color: #262626;
+      text-align: left;
+      span {
+        float: right;
+        position: relative;
+        top: 4px;
+      }
+    }
+    Button {
+      padding: 6px 12px;
+    }
+  }
+}
+
+/*============= New Jobs List =============*/
+.dashNewJobsMain {
+  padding: 0;
+  margin-bottom: 75px;
+  h4 {
+    .heartIcon {
+      float: none;
+      color: #bfbfbf;
+      margin-left: 10px;
+    }
+    i {
+      float: right;
+      font-size: 16px;
+      font-style: normal;
+    }
+  }
+}
+
+.empTopCompaniesMain .empDashTopsList {
+  i {
+    float: right;
+    font-style: normal;
+  }
+  .iconUp,
+  .iconDown {
+    float: none;
+    margin-left: 5px;
+  }
+}
+
+.empDashnewApplicationsMain .dashJobsCardItem {
+  h4 {
+    margin-bottom: 15px;
+    font-size: 14px;
+    img {
+      width: 30px;
+      height: 30px;
+      border-radius: 20px;
+      margin-right: 10px;
+    }
+    span {
+      font-weight: normal;
+      float: right;
+      font-size: 12px;
+      position: relative;
+      top: 4px;
+    }
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .dashJobsCardItem {
+    h4 {
+      font-size: 12px;
+    }
+    p {
+      font-size: 11px;
+    }
+    a {
+      font-size: 11px;
+    }
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .dashJobsCardItem {
+    h4 {
+      font-size: 11px;
+    }
+    p {
+      font-size: 10px;
+    }
+    a {
+      font-size: 10px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .jobsMainWrapper {
+    display: none;
+  }
+}

@@ -1,0 +1,44 @@
+.PFormMain {
+  padding-top: 30px;
+  a {
+    color: #262626;
+    font-size: 12px;
+    .icon {
+      color: #bfbfbf;
+    }
+  }
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+.postJobForm {
+  padding: 20px;
+  margin-top: 20px;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+}
+
+.postJobEditorMain {
+  padding-top: 35px;
+}
+
+.applicantMobile {
+  display: none;
+}
+.postJobEditorMobile {
+  display: none;
+}
+
+@media only screen and (max-width: 1049px) {
+  .applicantDesktop {
+    display: none;
+  }
+  .applicantMobile {
+    display: block;
+  }
+  .postJobEditorMobile {
+    display: block;
+    padding-bottom: 20px;
+  }
+}

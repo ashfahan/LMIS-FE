@@ -1,0 +1,2 @@
+info  - Loaded env from C:\inetpub\wwwroot\LMIS_UI\.env.local
+> Ready on http://148.251.211.104:\\.\pipe\7827d51c-e282-41a0-8d2b-a10dfaa19235

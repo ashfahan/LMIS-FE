@@ -1,0 +1,146 @@
+$primary_color: #0066ff;
+$blue_gray: #99bfff;
+.auth_sidebar {
+  background-color: $primary_color;
+  height: 100vh;
+  padding: 20px;
+  z-index: 100;
+  padding-left: 50px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  @media (max-width: 768px) {
+    display: none;
+  }
+  ul {
+    color: #fff;
+    position: relative;
+    z-index: 100;
+    margin-top: 50px;
+    li {
+      font-weight: 500;
+      display: grid;
+      grid-template-columns: 40px auto;
+      align-items: center;
+      font-size: 18px;
+      gap: 15px;
+      margin-bottom: 20px;
+      opacity: 0.7;
+      span {
+        display: inline-block;
+        height: 40px;
+        width: 40px;
+        border-radius: 30px;
+        border: solid 1px #fff;
+        text-align: center;
+        line-height: 38px;
+      }
+    }
+  }
+}
+
+.active {
+  opacity: 1 !important;
+  font-weight: bold !important;
+  span {
+    border: solid 2px #fff !important;
+  }
+}
+
+.sidebar_search_icon {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  height: 300px;
+  width: 300px;
+  // left: -80px;
+  background-image: url('../public/img/search.svg');
+  z-index: 10;
+}
+
+@media only screen and (max-width: 1085px) {
+  .sidebar_search_icon {
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+  }
+}
+
+.info_footer {
+  position: absolute;
+  bottom: 60px;
+  // left: 50px;
+  z-index: 20;
+  p {
+    color: #fff;
+    font-size: 18px;
+    margin-top: 10px;
+    color: $blue_gray;
+  }
+}
+
+.navigation {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 20px 40px;
+  justify-content: flex-end;
+  gap: 15px;
+  align-items: center;
+  p {
+    margin: 0;
+  }
+}
+
+.auth_fields_wrapper {
+  width: 350px;
+  margin: 0 auto;
+  margin-top: 60px;
+  p {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .auth_fields_wrapper {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .navigation {
+    padding: 20px 0;
+    justify-content: center;
+  }
+}
+
+// .signup_splash  {
+
+// }
+
+.spacer_or {
+  color: #d9d9d9;
+  display: block;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.frm_footer {
+  padding-top: 10px;
+  position: relative;
+}
+
+.back_step {
+  position: absolute;
+  right: 0;
+  top: 8px;
+  color: #bfbfbf;
+}
+
+.sidebarBelowLogo {
+  display: block;
+  height: 5px;
+  width: 60%;
+  margin-top: 12px;
+  // background-color: #FFAD3D;
+  background: linear-gradient(90deg, #ffad3d, #0066ff);
+}

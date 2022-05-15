@@ -1,0 +1,40 @@
+.authWrapper {
+  width: 350px;
+  margin: 0 auto;
+  margin-top: 60px;
+}
+.authWrapper p {
+  font-size: 14px;
+}
+.authWrapper svg,
+.authWrapper h3 {
+  display: inline-flex;
+}
+.authWrapper svg {
+  margin-right: 10px;
+  position: relative;
+  top: 5px;
+  height: 25px;
+}
+.authWrapper h3 {
+  font-size: 18px;
+}
+.sectionBottom {
+  position: relative;
+  margin-top: 40px;
+}
+.goBack {
+  position: absolute;
+  right: 0;
+  top: 8px;
+  font-size: 14px;
+  color: #bfbfbf;
+}
+
+.stepsBarCon {
+  padding: 0 50px;
+}
+.steps-content,
+.steps-action {
+  text-align: center;
+}
