@@ -15,4 +15,5 @@ export const permissionsEnum = {
   Dashboard: 14,
   LookUps: 15,
   SystemsLogs: 16,
+  ViewAJob: 16,
 }

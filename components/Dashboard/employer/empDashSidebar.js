@@ -28,6 +28,7 @@ const EmpDashSidebar = () => {
   const [isViewReport, setIsViewReport] = useState(false)
   const [isSystemsLogs, setIsSystemsLogs] = useState(false)
   const [isLookUps, setIsLookUps] = useState(false)
+  const [isViewAJob, setIsViewAJob] = useState(false)
   const lan = useRecoilValue(language)
   const { asPath } = useRouter()
 
@@ -42,6 +43,7 @@ const EmpDashSidebar = () => {
     setIsViewReport(_permissions.some((item) => item === permissionsEnum.ViewReport))
     setIsSystemsLogs(_permissions.some((item) => item === permissionsEnum.SystemsLogs))
     setIsLookUps(_permissions.some((item) => item === permissionsEnum.LookUps))
+    setIsViewAJob(_permissions.some((item) => item === permissionsEnum.ViewAJob))
   }, [])
 
   return (
@@ -64,9 +66,11 @@ const EmpDashSidebar = () => {
             </Menu.Item>
           )}
 
-          <Menu.Item key="/employboard-jobs" className={Style.overLay} icon={<AppstoreOutlined />}>
-            <Link href="/employboard-jobs">{t('all_jobs')}</Link>
-          </Menu.Item>
+          {isViewAJob && (
+            <Menu.Item key="/employboard-jobs" className={Style.overLay} icon={<AppstoreOutlined />}>
+              <Link href="/employboard-jobs">{t('all_jobs')}</Link>
+            </Menu.Item>
+          )}
 
           {isViewCandidates && (
             <Menu.Item key="/employboard-candidates" className={Style.overLay} icon={<UserOutlined />}>
