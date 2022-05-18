@@ -29,11 +29,6 @@ const Dashboard = () => {
   const { addToast } = useToasts()
   const userType = useRecoilValue(userTypeAtom)
   const { mutateAsync, isLoading, isSuccess, error, data } = useMutation(getOverView)
-  useEffect(() => {
-    if (userType != 1) {
-      router.push('/')
-    }
-  }, [])
 
   useEffect(() => {
     let _isDpAdded = sessionStorage.getItem('isDpAdded')
