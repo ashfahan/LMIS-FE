@@ -20,7 +20,7 @@ function Dropdown({ fetchOptions, i18n: { language }, debounceTimeout = 800, ...
 
   useEffect(() => {
     setOptions((prev) => prev.map((option) => ({ ...option, label: option.languages?.[language] ?? option.label })))
-  }, [language, options])
+  }, [language])
 
   return (
     <Form name="basic" layout="vertical" form={form} onFinish={() => {}} onFinishFailed={() => {}} autoComplete="off">

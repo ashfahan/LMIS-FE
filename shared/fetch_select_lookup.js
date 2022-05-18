@@ -14,6 +14,7 @@ function Dropdown({ fetchOptions, debounceTimeout = 800, bordered = true, i18n: 
     setOptions([])
     setFetching(true)
     fetchOptions(props.value).then((newOptions) => {
+      console.log(newOptions)
       setOptions(newOptions)
       setFetching(false)
     })
@@ -21,7 +22,7 @@ function Dropdown({ fetchOptions, debounceTimeout = 800, bordered = true, i18n: 
 
   useEffect(() => {
     setOptions((prev) => prev.map((option) => ({ ...option, label: option.languages?.[language] ?? option.label })))
-  }, [language, options])
+  }, [language])
 
   return (
     <Form name="basic" layout="vertical" form={form} onFinish={() => {}} onFinishFailed={() => {}} autoComplete="off">

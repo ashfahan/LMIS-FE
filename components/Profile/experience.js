@@ -1,16 +1,8 @@
 import { LeftOutlined } from '@ant-design/icons'
-import {
-  Button,
-  Checkbox,
-  Col,
-  DatePicker,
-  Form,
-  Input,
-  Row,
-  Select,
-} from 'antd'
+import { Button, Checkbox, Col, DatePicker, Form, Input, Row, Select } from 'antd'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { useToasts } from 'react-toast-notifications'
 import FetchSelectCompanies from '../../shared/fetch_select_companies'
@@ -26,16 +18,13 @@ const AddExperience = (props) => {
   const queryClient = useQueryClient()
   const { addToast } = useToasts()
   const { mutateAsync, isLoading, isSuccess } = useMutation(addExperienceApi)
+  const { t } = useTranslation()
 
   const experienceInt = addExperience()
   const [comp, setComp] = useState()
   const [currentlyWorkign, setCurrentlyWorking] = useState(false)
   const { data } = useQuery('getCandidatesExperience', () =>
-    getCandidatesExperience(
-      props.candiID
-        ? props.candiID
-        : sessionStorage.getItem('jobhop_loggedin_candidate_id'),
-    ),
+    getCandidatesExperience(props.candiID ? props.candiID : sessionStorage.getItem('jobhop_loggedin_candidate_id')),
   )
   // if (props.editMode) {
   //   form.setFieldsValue({
@@ -83,8 +72,7 @@ const AddExperience = (props) => {
     }
     values = { ...experienceInt, ...values }
     if (props.editMode) {
-      values.candidatesEmplopymentDetailID =
-        props.record_to_edit.candidatesEmplopymentDetailID
+      values.candidatesEmplopymentDetailID = props.record_to_edit.candidatesEmplopymentDetailID
     }
     // if (props.type !== "inDashboard") {
     //   values.lkpCompanyID = comp;
@@ -104,9 +92,7 @@ const AddExperience = (props) => {
     // values.lkpCompanyID = comp;
     // values.isCurrntlyWorking = currentlyWorkign;
     values.isExperienceAdded = true
-    values.FK_UserId = parseInt(
-      sessionStorage.getItem('jobhop_loggedin_user_id'),
-    )
+    values.FK_UserId = parseInt(sessionStorage.getItem('jobhop_loggedin_user_id'))
     mutateAsync(values, {
       onSuccess: async () => {
         addToast('Information added successfully', {
@@ -154,15 +140,8 @@ const AddExperience = (props) => {
   }
 
   return (
-    <div
-      className={Profile.BiggerForms}
-      style={
-        props.type === 'inDashboard' ? { width: 'auto', marginTop: '0' } : {}
-      }
-    >
-      {props.type != 'inDashboard' && (
-        <p className="title_size_text mt-3">Add your experience details</p>
-      )}
+    <div className={Profile.BiggerForms} style={props.type === 'inDashboard' ? { width: 'auto', marginTop: '0' } : {}}>
+      {props.type != 'inDashboard' && <p className="title_size_text mt-3">Add your experience details</p>}
 
       <Form
         name="basic"
@@ -174,21 +153,17 @@ const AddExperience = (props) => {
       >
         <Row gutter={30}>
           <Col span={12}>
-            <Form.Item
-              label="Title"
-              name="designation"
-              rules={[{ required: true }]}
-              hasFeedback
-            >
+            <Form.Item label="Title" name="designation" rules={[{ required: true }]} hasFeedback>
               <Input size="large" placeholder="E.g. Design Manager" />
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item label="Employment Type" name="employmentType">
               <Select placeholder="E.g. Full time" size="large">
-                <Option value={0}>Full-time</Option>
-                <Option value={1}>Part-time</Option>
-                <Option value={2}>Remote</Option>
+                <Option value={0}>{t('Full_time')}</Option>
+                <Option value={1}>{t('Part_time')}</Option>
+                <Option value={2}>{t('Remote')}</Option>
+                <Option value={3}>{t('Contract')}</Option>
               </Select>
             </Form.Item>
           </Col>
@@ -196,20 +171,13 @@ const AddExperience = (props) => {
 
         <Row gutter={30}>
           <Col span={12}>
-            <Form.Item
-              label="Company"
-              name="lkpCompanyID"
-              rules={[{ required: true }]}
-              hasFeedback
-            >
+            <Form.Item label="Company" name="lkpCompanyID" rules={[{ required: true }]} hasFeedback>
               {/* <FetchSelectCompanies typeID={1} onOptionSelect={onCompanySelect} /> */}
 
               <FetchSelectCompanies
                 typeID={1}
                 onOptionSelect={onCompanySelect}
-                selectedValue={
-                  props.editMode && props.record_to_edit.companyName
-                }
+                selectedValue={props.editMode && props.record_to_edit.companyName}
               />
               {/* <Input size="large" placeholder="E.g. Salesforce" /> */}
             </Form.Item>
@@ -222,11 +190,7 @@ const AddExperience = (props) => {
         </Row>
 
         <Row>
-          <Form.Item
-            name="isCurrntlyWorking"
-            valuePropName="checked"
-            onChange={disableEndDate}
-          >
+          <Form.Item name="isCurrntlyWorking" valuePropName="checked" onChange={disableEndDate}>
             <Checkbox>I am currently working here</Checkbox>
           </Form.Item>
         </Row>
@@ -272,9 +236,7 @@ const AddExperience = (props) => {
                     } else if (currentlyWorkign) {
                       return Promise.resolve()
                     }
-                    return Promise.reject(
-                      'start date must be greater than end date',
-                    )
+                    return Promise.reject('start date must be greater than end date')
                   },
                 }),
               ]}
@@ -302,19 +264,12 @@ const AddExperience = (props) => {
           </Col>
         </Row>
 
-        <Button
-          type="primary"
-          loading={isLoading}
-          htmlType="submit"
-          style={{ marginBottom: '15px' }}
-        >
+        <Button type="primary" loading={isLoading} htmlType="submit" style={{ marginBottom: '15px' }}>
           {props.editMode ? 'Edit ' : 'Add '}Experience
         </Button>
 
         <Form.Item>
-          {props.type != 'inDashboard' && (
-            <ExperienceAdded type="inProcessProfile" />
-          )}
+          {props.type != 'inDashboard' && <ExperienceAdded type="inProcessProfile" />}
 
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {props.type != 'inDashboard' && (

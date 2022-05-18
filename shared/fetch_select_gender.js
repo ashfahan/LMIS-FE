@@ -1,7 +1,6 @@
 import { Form, Select, Spin } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { withTranslation } from 'react-i18next'
-import { DebounceSelect } from '../components/DebounceSelect/DebounceSelect'
 
 async function fetchUserList(username, typeID) {
   return fetch(`${process.env.NEXT_PUBLIC_API_URL}/LKP/GetAllLookUpValues_ByFK_LookUpId?FK_LookUpId=${typeID}`)
@@ -24,6 +23,7 @@ export const Dropdown = (props) => {
     i18n: { language },
     defaultValue,
     i18n,
+    ...rest
   } = props
   const [fetching, setFetching] = React.useState(false)
   const [options, setOptions] = React.useState([])
@@ -43,7 +43,7 @@ export const Dropdown = (props) => {
 
   useEffect(() => {
     setOptions((prev) => prev.map((option) => ({ ...option, label: option.languages?.[language] ?? option.label })))
-  }, [language, options])
+  }, [language])
 
   return (
     <Form name="basic" layout="vertical" form={form} onFinish={() => {}} onFinishFailed={() => {}} autoComplete="off">
