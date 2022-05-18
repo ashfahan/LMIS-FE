@@ -13,7 +13,6 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { permissionsEnum } from '../../../shared/permissionsEnum'
 import { language, sidebarToggleBtn } from '../../../stores/atoms/app_config_atom'
 import Style from '../../../styles/dashboard.module.scss'
 
@@ -32,18 +31,15 @@ const EmpDashSidebar = () => {
   const lan = useRecoilValue(language)
   const { asPath } = useRouter()
 
-  console.log('asd')
-
   useEffect(() => {
     let _permissions = JSON.parse(sessionStorage.getItem('permissions')) || []
-    console.log(_permissions)
-    setIsViewCandidates(_permissions.some((item) => item === permissionsEnum.viewCandidates))
-    setIsUserManagement(_permissions.some((item) => item === permissionsEnum.userManagement))
-    setIsRoleManagement(_permissions.some((item) => item === permissionsEnum.roleManagement))
-    setIsViewReport(_permissions.some((item) => item === permissionsEnum.ViewReport))
-    setIsSystemsLogs(_permissions.some((item) => item === permissionsEnum.SystemsLogs))
-    setIsLookUps(_permissions.some((item) => item === permissionsEnum.LookUps))
-    setIsViewAJob(_permissions.some((item) => item === permissionsEnum.ViewAJob))
+    setIsViewCandidates(true)
+    setIsUserManagement(true)
+    setIsRoleManagement(true)
+    setIsViewReport(true)
+    setIsSystemsLogs(true)
+    setIsLookUps(true)
+    setIsViewAJob(true)
   }, [])
 
   return (

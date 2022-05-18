@@ -1,8 +1,4 @@
-import {
-  DeleteOutlined,
-  EditOutlined,
-  LoadingOutlined,
-} from '@ant-design/icons'
+import { DeleteOutlined, EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { Button, Popconfirm, Spin, Table } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
@@ -23,19 +19,14 @@ const CityTable = (props) => {
   const queryClient = useQueryClient()
 
   const [language, setLanguage] = useState('en')
-  let appLanguage =
-    typeof window !== 'undefined' && sessionStorage.getItem('i18nextLng')
+  let appLanguage = typeof window !== 'undefined' && sessionStorage.getItem('i18nextLng')
   useEffect(() => {
     setLanguage(appLanguage)
   }, [appLanguage])
   useEffect(() => {
     let _permissions = JSON.parse(sessionStorage.getItem('permissions')) || []
-    setIsDeleteCategory(
-      _permissions.some((item) => item === permissionsEnum.deleteCategory),
-    )
-    setIsEditCategory(
-      _permissions.some((item) => item === permissionsEnum.editCategory),
-    )
+    setIsDeleteCategory(_permissions.some((item) => item === permissionsEnum.deleteCategory))
+    setIsEditCategory(_permissions.some((item) => item === permissionsEnum.editCategory))
   }, [])
 
   useEffect(() => {
@@ -80,18 +71,12 @@ const CityTable = (props) => {
         <>
           <div className={Style.actionContaienr}>
             {isEditCategory && (
-              <Button
-                className={Style.editButton}
-                onClick={() => handleEditRecord(record)}
-              >
+              <Button className={Style.editButton} onClick={() => handleEditRecord(record)}>
                 <EditOutlined />
               </Button>
             )}
             {isDeleteCategory && (
-              <Popconfirm
-                title="Sure to delete?"
-                onConfirm={() => handleDelete(record.lookUpValueId)}
-              >
+              <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.lookUpValueId)}>
                 <DeleteOutlined className={Style.trashIcon} />
               </Popconfirm>
             )}
@@ -120,10 +105,7 @@ const CityTable = (props) => {
             padding: '30px',
           }}
         >
-          <Spin
-            size="large"
-            indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-          />
+          <Spin size="large" indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
         </div>
       )}
     </div>

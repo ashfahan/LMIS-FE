@@ -50,10 +50,7 @@ const AboutYourself = (props) => {
   }
   const { data, isLoading: aboutYourLoading } = useQuery(
     'getSingleCandidate',
-    () =>
-      getSingleCandidate(
-        sessionStorage.getItem('jobhop_loggedin_candidate_id'),
-      ),
+    () => getSingleCandidate(sessionStorage.getItem('jobhop_loggedin_candidate_id')),
     {
       onSuccess: async (response) => {
         if (!!response && response.length > 0) {
@@ -135,15 +132,10 @@ const AboutYourself = (props) => {
   }
 
   return (
-    <div
-      className={Profile.authWrapper}
-      style={props.editMode ? { margin: 0 } : {}}
-    >
+    <div className={Profile.authWrapper} style={props.editMode ? { margin: 0 } : {}}>
       {props.editMode && (
         <div>
-          <h3 className={Profile.fontSmHead}>
-            {t('upload_profile_pic_text')}{' '}
-          </h3>
+          <h3 className={Profile.fontSmHead}>{t('upload_profile_pic_text')} </h3>
           <div
             style={{
               display: 'flex',
@@ -164,26 +156,12 @@ const AboutYourself = (props) => {
               className={Profile.profileImgContainer}
             >
               {data && data[0]?.picture ? (
-                <img
-                  style={{ width: '100%', height: '100%' }}
-                  src={`${data[0]?.picture}`}
-                  alt=""
-                />
+                <img style={{ width: '100%', height: '100%' }} src={`${data[0]?.picture}`} alt="" />
               ) : (
-                <Image
-                  className={Profile.profileImgContainer}
-                  width="100%"
-                  height="100%"
-                  src={user}
-                  alt="search"
-                />
+                <Image className={Profile.profileImgContainer} width="100%" height="100%" src={user} alt="search" />
               )}
             </div>
-            <Button
-              className={Profile.recordAdditionBtn}
-              onClick={() => setProfileModal(true)}
-              type="primary"
-            >
+            <Button className={Profile.recordAdditionBtn} onClick={() => setProfileModal(true)} type="primary">
               Upload Picture
             </Button>
             <Modal
@@ -192,27 +170,15 @@ const AboutYourself = (props) => {
               onCancel={() => setProfileModal(false)}
               footer={null}
             >
-              <UploadDP
-                type="inDashboard"
-                hideModal={() => setProfileModal(false)}
-              />
+              <UploadDP type="inDashboard" hideModal={() => setProfileModal(false)} />
             </Modal>
           </div>
           <hr style={{ borderColor: '#fff', margin: '20px 0' }} />
 
           <h3 className={Profile.fontSmHead}>Update Your Resume</h3>
 
-          <a
-            href={`data:application/pdf;base64,${data && data[0]?.resumePath}`}
-            download="file.pdf"
-          >
-            <Image
-              className={Profile.profileImgContainer}
-              width="60"
-              height="60"
-              src={pdf}
-              alt="search"
-            />
+          <a href={`data:application/pdf;base64,${data && data[0]?.resumePath}`} download="file.pdf">
+            <Image className={Profile.profileImgContainer} width="60" height="60" src={pdf} alt="search" />
             <span className={Profile.fontSm} style={{ display: 'block' }}>
               Download Resume
             </span>
@@ -228,12 +194,7 @@ const AboutYourself = (props) => {
           >
             Upload Resume
           </Button>
-          <Modal
-            title={`Update Resume`}
-            visible={resumeDialog}
-            onCancel={() => setResumeDialog(false)}
-            footer={null}
-          >
+          <Modal title={`Update Resume`} visible={resumeDialog} onCancel={() => setResumeDialog(false)} footer={null}>
             <UploadCV
               type="inDashboard"
               onSuccessAction={() => {}}
@@ -244,91 +205,41 @@ const AboutYourself = (props) => {
         </div>
       )}
 
-      <p className={[Profile.fontSmHead, 'title_size_text mt-3']}>
-        {t('tell_us_a_bit_about_yourself')}
-      </p>
+      <p className={[Profile.fontSmHead, 'title_size_text mt-3']}>{t('tell_us_a_bit_about_yourself')}</p>
       {!aboutYourLoading ? (
         <Form
           name="basic"
           layout="vertical"
           form={form}
-          //  initialValues={{
-          //     // location: { value: state && state.city },
-          //     gender: state.gender,
-          //     about: state.about,
-          //     dob: state.dob
-          // }}
           onFinish={onSubmitInfo}
           onFinishFailed={() => {}}
           autoComplete="off"
         >
-          <Form.Item
-            name="city"
-            label={t('where_are_you_currently_located_at')}
-            rules={[{ required: true }]}
-          >
-            {/* <Select
-                      showSearch
-                      placeholder="Please Select Location"
-                      size="large"
-                      // defaultValue={{ value: state && state.city }}
-                      // onChange={citySelected}
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                      }
-                      filterSort={(optionA, optionB) =>
-                          optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-                      }
-                  >
-                          {data && data.length && data.map(option => {
-                              return <Option key={Math.random()} value={option.lookUpValueId}>{option.lookUpValue}</Option>
-                          })}
-                  </Select> */}
+          <Form.Item name="city" label={t('where_are_you_currently_located_at')} rules={[{ required: true }]}>
             <FetchSelectLookup
               typeID={3}
               onOptionSelect={citySelected}
               defaultValue={data && data[0]?.cityName}
-              selectedValue={
-                props.editMode && data && data.length >= 1 && data[0].cityName
-              }
+              selectedValue={props.editMode && data && data.length >= 1 && data[0].cityName}
             />
-            {/* <Input size="large" placeholder="E.g. Tripoli, Libya" /> */}
           </Form.Item>
 
-          <Form.Item
-            name="dob"
-            label={t('date_of_birth')}
-            rules={[{ required: true }]}
-          >
+          <Form.Item name="dob" label={t('date_of_birth')} rules={[{ required: true }]}>
             <DatePicker
-              // defaultValue={moment(new Date(), "yyyy/mm/dd")}
               placeholder={'yyyy/mm/dd'}
-              // disabledDate={disabledDate}
-              disabledDate={(current) => {
-                return moment().add(-1, 'days') < current
-              }}
+              disabledDate={(current) => moment().add(-1, 'days') < current}
               size="large"
               style={{ width: '100%' }}
               className="fontSm"
             />
           </Form.Item>
 
-          <Form.Item
-            name="gender"
-            label={t('what_is_your_gender')}
-            rules={[{ required: true }]}
-          >
-            <Select
-              className={Profile.fontSm}
-              placeholder={t('gender')}
-              size="large"
-            >
+          <Form.Item name="gender" label={t('what_is_your_gender')} rules={[{ required: true }]}>
+            <Select className={Profile.fontSm} placeholder={t('gender')} size="large">
               <Option value="Male">{t('male')}</Option>
               <Option value="Female">{t('female')}</Option>
               <Option value="Others">{t('other')}</Option>
             </Select>
-            {/* <FetchSelectLookup typeID={11} onOptionSelect={onSelectGender} /> */}
           </Form.Item>
 
           <Form.Item
@@ -336,10 +247,7 @@ const AboutYourself = (props) => {
             label={t('how_would_you_describe_yourself_professionally')}
             rules={[{ required: true }]}
           >
-            <Input.TextArea
-              className={Profile.fontSm}
-              placeholder={t('add_your_message')}
-            />
+            <Input.TextArea className={Profile.fontSm} placeholder={t('add_your_message')} />
           </Form.Item>
 
           <Form.Item>
@@ -368,10 +276,7 @@ const AboutYourself = (props) => {
             padding: '30px',
           }}
         >
-          <Spin
-            size="large"
-            indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-          />
+          <Spin size="large" indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
         </div>
       )}
     </div>

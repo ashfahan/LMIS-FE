@@ -2,6 +2,7 @@ import { Steps } from 'antd'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import AuthLayout from '../components/Auth/authLayout'
 import AboutYourself from '../components/Profile/aboutYourself'
 import AddEducation from '../components/Profile/education'
@@ -12,10 +13,10 @@ import Style from '../styles/profile.module.scss'
 
 const Profile = () => {
   const router = useRouter()
+  const { t } = useTranslation()
   // const userType = useRecoilValue(userTypeAtom);
   const [isFirstLogin, setFirstLogin] = useState(
-    typeof window !== 'undefined' &&
-      sessionStorage.getItem('user_first_login_jobhop'),
+    typeof window !== 'undefined' && sessionStorage.getItem('user_first_login_jobhop'),
   )
 
   useEffect(() => {
@@ -27,17 +28,10 @@ const Profile = () => {
     }
     return () => {
       // cleanup
-      typeof window !== 'undefined' &&
-        sessionStorage.setItem('user_first_login_jobhop', true)
+      typeof window !== 'undefined' && sessionStorage.setItem('user_first_login_jobhop', true)
     }
   }, [])
-  const [stepStates, setStepStates] = useState([
-    'process',
-    'wait',
-    'wait',
-    'wait',
-    'wait',
-  ])
+  const [stepStates, setStepStates] = useState(['process', 'wait', 'wait', 'wait', 'wait'])
   const { Step } = Steps
 
   const [current, setCurrent] = useState(0)
@@ -78,12 +72,7 @@ const Profile = () => {
     <div>
       <AuthLayout step={2} page="profile">
         <div className={Style.authWrapper}>
-          <Steps
-            type="navigation"
-            current={current}
-            onChange={changeSteps}
-            size="small"
-          >
+          <Steps type="navigation" current={current} onChange={changeSteps} size="small">
             {stepStates.map((item, index) => (
               <Step key={index} status={item} />
             ))}
@@ -92,7 +81,7 @@ const Profile = () => {
         <div className={Style.showStepsFields}>
           <Link href="/dashboard">
             <span className="absolute top-0 left-0 ml-5 mt-5 text-slate-400 cursor-pointer">
-              Skip to Dashboard
+              {t('skip_to_dashboard')}
             </span>
           </Link>
           {current === 0 && (

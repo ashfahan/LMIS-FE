@@ -1,27 +1,15 @@
-import { LoadingOutlined } from '@ant-design/icons'
-import { Form, Select, Spin } from 'antd'
-import debounce from 'lodash/debounce'
+import { Form, Select } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
-function DebounceSelect({
-  fetchOptions,
-  debounceTimeout = 800,
-  bordered = true,
-  ...props
-}) {
+function Dropdown({ fetchOptions, debounceTimeout = 800, bordered = true, i18n: { language }, ...props }) {
   const [fetching, setFetching] = React.useState(false)
   const [options, setOptions] = React.useState([])
   const { Option } = Select
-  // const [defaultVal, setDefaultVal] = React.useState(props.selectedVal);
   const [form] = Form.useForm()
-  const fetchRef = React.useRef(0)
-  const { t } = useTranslation()
-  if (props.selectedVal) {
-    form.setFieldsValue({
-      loookup: props.selectedVal,
-    })
-  }
+
+  if (props.selectedVal) form.setFieldsValue({ loookup: props.selectedVal })
+
   useEffect(() => {
     setOptions([])
     setFetching(true)
@@ -31,101 +19,56 @@ function DebounceSelect({
     })
   }, [])
 
-  const debounceFetcher = React.useMemo(() => {
-    const loadOptions = (value) => {
-      // setDefaultVal(props.selectedVal);
-      fetchRef.current += 1
-      const fetchId = fetchRef.current
-      setOptions([])
-      setFetching(true)
-      fetchOptions(value).then((newOptions) => {
-        if (fetchId !== fetchRef.current) {
-          // for fetch callback order
-          return
-        }
-
-        setOptions(newOptions)
-        setFetching(false)
-      })
-    }
-
-    return debounce(loadOptions, debounceTimeout)
-  }, [fetchOptions, debounceTimeout])
+  useEffect(() => {
+    setOptions((prev) => prev.map((option) => ({ ...option, label: option.languages?.[language] ?? option.label })))
+  }, [language, options])
 
   return (
-    <Form
-      name="basic"
-      layout="vertical"
-      form={form}
-      onFinish={() => {}}
-      onFinishFailed={() => {}}
-      autoComplete="off"
-    >
+    <Form name="basic" layout="vertical" form={form} onFinish={() => {}} onFinishFailed={() => {}} autoComplete="off">
       <Form.Item name="loookup" noStyle>
         <Select
           bordered={bordered}
-          //filterOption={false}
           size="large"
           showSearch
           className="fontSm"
-          // onSearch={debounceFetcher}
-          // onClick={debounceFetcher}
-          notFoundContent={
-            fetching ? (
-              <Spin
-                size="small"
-                indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-              />
-            ) : null
-          }
+          loading={fetching}
           {...props}
-          // options={options}
           optionFilterProp="children"
-          filterOption={(input, option) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
+          filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
           filterSort={(optionA, optionB) =>
-            optionA.children
-              .toLowerCase()
-              .localeCompare(optionB.children.toLowerCase())
+            optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
           }
           defaultValue={props.defaultValue}
         >
-          {options &&
-            options.map((option) => {
-              return (
-                <Option key={Math.random} value={option.value}>
-                  {option.label}
-                </Option>
-              )
-            })}
+          {options?.map((option) => (
+            <Option key={Math.random} value={option.value}>
+              {option.label}
+            </Option>
+          ))}
         </Select>
       </Form.Item>
     </Form>
   )
 }
 
+const DebounceSelect = withTranslation()(Dropdown)
+
 async function fetchUserList(username, typeID) {
-  let _language = sessionStorage.getItem('i18nextLng')
-  return fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/LKP/GetAllLookUpValues_ByFK_LookUpId?FK_LookUpId=${typeID}`,
-  )
+  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/LKP/GetAllLookUpValues_ByFK_LookUpId?FK_LookUpId=${typeID}`)
     .then((response) => response.json())
     .then((body) =>
       body.map((user) => ({
-        label: `${_language === 'en' ? user.lookUpValue : user.lookUpValue_Ar}`,
+        label: user.lookUpValue,
+        languages: {
+          en: user.lookUpValue,
+          ar: user.lookUpValue_Ar,
+        },
         value: user.lookUpValueId,
       })),
     )
 }
 
-const FetchSelectLookup = ({
-  typeID,
-  onOptionSelect,
-  selectedValue,
-  defaultValue,
-  bordered,
-}) => {
+const FetchSelectLookup = ({ typeID, onOptionSelect, selectedValue, defaultValue, bordered }) => {
   const [value, setValue] = useState([])
 
   const onSelectOption = (newValue) => {
@@ -138,37 +81,31 @@ const FetchSelectLookup = ({
       value={value}
       showSearch
       bordered={bordered}
-      //placeholder={t("select_an_option")}
       fetchOptions={() => fetchUserList(value, typeID)}
       onChange={onSelectOption}
       defaultValue={defaultValue}
       selectedVal={selectedValue}
-      style={{
-        width: '100%',
-      }}
+      style={{ width: '100%' }}
     />
   )
 }
 
 async function fetchEmploymentType(username, typeID) {
-  return fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/LKP/GetAllLookUpValues_ByFK_LookUpId?FK_LookUpId=${typeID}`,
-  )
+  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/LKP/GetAllLookUpValues_ByFK_LookUpId?FK_LookUpId=${typeID}`)
     .then((response) => response.json())
     .then((body) =>
       body.map((user) => ({
         label: `${user.lookUpValue}`,
+        languages: {
+          en: user.lookUpValue,
+          ar: user.lookUpValue_Ar,
+        },
         value: `${user.lookUpValue}`,
       })),
     )
 }
 
-const FetchSelectEmploymentType = ({
-  typeID,
-  onOptionSelect,
-  selectedValue,
-  defaultValue,
-}) => {
+const FetchSelectEmploymentType = ({ typeID, onOptionSelect, selectedValue, defaultValue }) => {
   const [value, setValue] = useState([])
 
   const onSelectOption = (newValue) => {
@@ -180,7 +117,6 @@ const FetchSelectEmploymentType = ({
     <DebounceSelect
       value={value}
       showSearch
-      //placeholder={t("select_an_option")}
       fetchOptions={() => fetchEmploymentType(value, typeID)}
       onChange={onSelectOption}
       defaultValue={defaultValue}
@@ -193,43 +129,3 @@ const FetchSelectEmploymentType = ({
 }
 
 export { FetchSelectEmploymentType, FetchSelectLookup }
-
-// import React, {useState, useEffect} from 'react';
-// import { Select, Spin} from 'antd';
-// import {useQuery} from 'react-query';
-// import {getLookups} from '../stores/apis/lookup_api';
-
-// const FetchSelectLookup = ({typeID, onOptionSelect, selectedValue}) => {
-
-//     const [showoptoins, setShowOptions] = useState([]);
-
-//     useEffect(() => {
-//         setShowOptions([]);
-//     }, [])
-
-//     const debounceFetcher = (newValue) => {
-//         console.log(newValue);
-//         const {isLoading, error, data} = useQuery("getAllLookups", () => getLookups(typeID), {
-//             onSuccess: (data) => {
-//                 setShowOptions(data);
-//             }
-//         });
-//     }
-
-//     return (
-//         <Select
-//              placeholder={t("select_an_option")}
-//             size="large"
-//             showSearch
-//             // onSearch={debounceFetcher}
-//             notFoundContent={  <Spin size="small" /> }
-//         >
-//         {showoptoins.map(option => {
-//             return <Option value={option.lookUpValueId}>{option.lookUpValue}</Option>
-//         })}
-//       </Select>
-
-//     );
-// }
-
-// export default FetchSelectLookup;
