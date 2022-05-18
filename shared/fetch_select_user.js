@@ -2,6 +2,7 @@ import { Form, Select, Spin } from 'antd'
 import { isEqual } from 'lodash'
 import debounce from 'lodash/debounce'
 import React, { useEffect, useState } from 'react'
+import { withTranslation } from 'react-i18next'
 
 function Dropdown({ fetchOptions, debounceTimeout = 800, i18n: { language }, ...props }) {
   const [fetching, setFetching] = React.useState(false)
