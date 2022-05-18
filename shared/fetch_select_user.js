@@ -1,4 +1,5 @@
 import { Form, Select, Spin } from 'antd'
+import { isEqual } from 'lodash'
 import debounce from 'lodash/debounce'
 import React, { useEffect, useState } from 'react'
 
@@ -15,8 +16,9 @@ function Dropdown({ fetchOptions, debounceTimeout = 800, i18n: { language }, ...
   }
 
   useEffect(() => {
-    setOptions((prev) => prev.map((option) => ({ ...option, label: option.languages?.[language] ?? option.label })))
-  }, [language])
+    const newValue = options.map((option) => ({ ...option, label: option.languages?.[language] ?? option.label }))
+    if (!isEqual(options, newValue)) setOptions(newValue)
+  }, [language, options])
 
   const debounceFetcher = React.useMemo(() => {
     const loadOptions = (value) => {

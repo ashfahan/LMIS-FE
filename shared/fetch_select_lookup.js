@@ -1,4 +1,5 @@
 import { Form, Select } from 'antd'
+import { isEqual } from 'lodash'
 import React, { useEffect, useState } from 'react'
 import { withTranslation } from 'react-i18next'
 
@@ -21,8 +22,9 @@ function Dropdown({ fetchOptions, debounceTimeout = 800, bordered = true, i18n: 
   }, [])
 
   useEffect(() => {
-    setOptions((prev) => prev.map((option) => ({ ...option, label: option.languages?.[language] ?? option.label })))
-  }, [language])
+    const newValue = options.map((option) => ({ ...option, label: option.languages?.[language] ?? option.label }))
+    if (!isEqual(options, newValue)) setOptions(newValue)
+  }, [language, options])
 
   return (
     <Form name="basic" layout="vertical" form={form} onFinish={() => {}} onFinishFailed={() => {}} autoComplete="off">

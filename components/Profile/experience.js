@@ -153,7 +153,7 @@ const AddExperience = (props) => {
       >
         <Row gutter={30}>
           <Col span={12}>
-            <Form.Item label="Title" name="designation" rules={[{ required: true }]} hasFeedback>
+            <Form.Item label={t('Title')} name="designation" rules={[{ required: true }]} hasFeedback>
               <Input size="large" placeholder="E.g. Design Manager" />
             </Form.Item>
           </Col>
@@ -171,7 +171,7 @@ const AddExperience = (props) => {
 
         <Row gutter={30}>
           <Col span={12}>
-            <Form.Item label="Company" name="lkpCompanyID" rules={[{ required: true }]} hasFeedback>
+            <Form.Item label={t('Company')} name="lkpCompanyID" rules={[{ required: true }]} hasFeedback>
               {/* <FetchSelectCompanies typeID={1} onOptionSelect={onCompanySelect} /> */}
 
               <FetchSelectCompanies
@@ -183,7 +183,7 @@ const AddExperience = (props) => {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="location" label="Location">
+            <Form.Item name="location" label={t('Location')}>
               <Input size="large" placeholder="E.g. Barlin, Germany" />
             </Form.Item>
           </Col>
@@ -199,7 +199,7 @@ const AddExperience = (props) => {
           <Col span={12}>
             <Form.Item
               name="startDate"
-              label="Start Date"
+              label={t('Start Date')}
               rules={[
                 {
                   required: true,
@@ -215,14 +215,14 @@ const AddExperience = (props) => {
                 disabledDate={(current) => {
                   return moment().add(-1, 'days') < current
                 }}
-              ></DatePicker>
+              />
             </Form.Item>
           </Col>
 
           <Col span={12}>
             <Form.Item
               name="endDate"
-              label="End Date"
+              label={t('End Date')}
               dependencies={['startDate']}
               rules={[
                 {
@@ -251,14 +251,14 @@ const AddExperience = (props) => {
                 disabledDate={(current) => {
                   return moment().add(-1, 'days') < current
                 }}
-              ></DatePicker>
+              />
             </Form.Item>
           </Col>
         </Row>
 
         <Row gutter={30}>
           <Col span={24}>
-            <Form.Item name="description" label="Description">
+            <Form.Item name="description" label={t('Description')}>
               <Input.TextArea placeholder="Details about this experience" />
             </Form.Item>
           </Col>
