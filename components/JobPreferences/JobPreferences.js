@@ -25,35 +25,22 @@ const JobPreferencesSub = (props) => {
 
   const { data, isLoading: preferenceLoading } = useQuery(
     'GetSingleJobPreferences',
-    () =>
-      getSingleJobPreferences(
-        sessionStorage.getItem('jobhop_loggedin_candidate_id'),
-      ),
+    () => getSingleJobPreferences(sessionStorage.getItem('jobhop_loggedin_candidate_id')),
     {
       onSuccess: async (response) => {
         if (response.length > 0) {
           response = response.reverse()
           form.setFieldsValue({
             ...form.getFieldsValue(),
-            lkp_JobTitleID:
-              response && response.length > 0 && response[0]?.lkp_JobTitleID,
+            lkp_JobTitleID: response && response.length > 0 && response[0]?.lkp_JobTitleID,
 
-            lkp_Location:
-              response && response.length > 0 && response[0]?.lkp_Location,
+            lkp_Location: response && response.length > 0 && response[0]?.lkp_Location,
 
             // gender: response && response.length >=1 && response[0].gender,
             // about: response && response.length >=1 && response[0].about,
           })
-          setMinRange(
-            response[0]?.expectedSalary
-              ? response[0]?.expectedSalary / 1000
-              : 0,
-          )
-          setMaxRange(
-            response[0]?.expectedSalaryMax
-              ? response[0]?.expectedSalaryMax / 1000
-              : 20,
-          )
+          setMinRange(response[0]?.expectedSalary ? response[0]?.expectedSalary / 1000 : 0)
+          setMaxRange(response[0]?.expectedSalaryMax ? response[0]?.expectedSalaryMax / 1000 : 20)
         }
       },
     },
@@ -106,13 +93,8 @@ const JobPreferencesSub = (props) => {
   }
 
   return (
-    <div
-      className={Profile.authWrapper}
-      style={props.editMode ? { margin: 0 } : {}}
-    >
-      {!props.editMode && (
-        <p className="title_size_text mt-3">{t('pref_top_heading')}</p>
-      )}
+    <div className={Profile.authWrapper} style={props.editMode ? { margin: 0 } : {}}>
+      {!props.editMode && <p className="title_size_text mt-3">{t('pref_top_heading')}</p>}
 
       {preferenceLoading ? (
         <div
@@ -123,10 +105,7 @@ const JobPreferencesSub = (props) => {
             padding: '30px',
           }}
         >
-          <Spin
-            size="large"
-            indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-          />
+          <Spin size="large" indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
         </div>
       ) : (
         <Form
@@ -137,11 +116,7 @@ const JobPreferencesSub = (props) => {
           onFinishFailed={() => {}}
           autoComplete="off"
         >
-          <Form.Item
-            label={t('pref_label_1')}
-            name="lkp_JobTitleID"
-            rules={[{ required: true }]}
-          >
+          <Form.Item label={t('pref_label_1')} name="lkp_JobTitleID" rules={[{ required: true }]}>
             <FetchSelectLookup
               typeID={16}
               onOptionSelect={onTitleSelect}
@@ -149,11 +124,7 @@ const JobPreferencesSub = (props) => {
             />
             {/* <Input placeholder="E.g. Design Manager" size="large"/> */}
           </Form.Item>
-          <Form.Item
-            name="lkp_Location"
-            label={t('pref_label_2')}
-            rules={[{ required: true }]}
-          >
+          <Form.Item name="lkp_Location" label={t('pref_label_2')} rules={[{ required: true }]}>
             <FetchSelectLookup
               typeID={3}
               onOptionSelect={citySelected}
@@ -161,13 +132,13 @@ const JobPreferencesSub = (props) => {
             />
           </Form.Item>
 
-          {/* <Form.Item 
+          {/* <Form.Item
                   name="job_title"
                   label={t("pref_label_1")}
                   rules={[{ required: true }]} >
                     <Input size="large" placeholder={t("perf_input1_placeholder")} />
                 </Form.Item> */}
-          {/* <Form.Item 
+          {/* <Form.Item
                   name="job_location"
                   label={t("pref_label_2")}
                   rules={[{ required: true }]} >

@@ -160,8 +160,8 @@ const AddExperience = (props) => {
           <Col span={12}>
             <Form.Item label="Employment Type" name="employmentType">
               <Select placeholder="E.g. Full time" size="large">
-                <Option value={0}>{t('Full_time')}</Option>
-                <Option value={1}>{t('Part_time')}</Option>
+                <Option value={0}>{t('Full time')}</Option>
+                <Option value={1}>{t('Part time')}</Option>
                 <Option value={2}>{t('Remote')}</Option>
                 <Option value={3}>{t('Contract')}</Option>
               </Select>

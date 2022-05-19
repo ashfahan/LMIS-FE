@@ -17,9 +17,7 @@ const UploadDP = (props) => {
   const router = useRouter()
   const { t } = useTranslation()
 
-  const { data } = useQuery('getSingleUser', () =>
-    getSingleUser(sessionStorage.getItem('jobhop_loggedin_user_id')),
-  )
+  const { data } = useQuery('getSingleUser', () => getSingleUser(sessionStorage.getItem('jobhop_loggedin_user_id')))
 
   const { addToast } = useToasts()
   const { mutateAsync, isLoading } = useMutation(createUser)
@@ -46,39 +44,15 @@ const UploadDP = (props) => {
           padding: '30px',
         }}
       >
-        <Spin
-          size="large"
-          indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-        />
+        <Spin size="large" indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
       </div>
     )
-  const dummyRequest = ({ onSuccess }) => {
-    setTimeout(() => onSuccess('ok0'))
-  }
 
   const inner_props = {
     name: 'file',
     multiple: false,
     listType: 'picture',
 
-    onChange(info) {
-      const fileExtension = info.file.name.split('.').pop()
-      if (fileExtension != 'jpeg') {
-        return
-      } else {
-        if ((fileExtension = 'jpeg' && info.file.status == 'done')) {
-          fileToBase64(info.file.originFileObj, (err, result) => {
-            if (result) {
-              setFile(result)
-              const ext = fileExtension
-              setFileName(ext)
-            }
-          })
-        } else {
-          return false
-        }
-      }
-    },
     onRemove() {
       setFile(null)
     },
@@ -97,10 +71,7 @@ const UploadDP = (props) => {
       pictureExt: fileName,
     }
     let userdata = data || {}
-    Object.keys(userdata).length > 0 &&
-      Object.keys(userdata).forEach(
-        (k) => userdata[k] == null && delete userdata[k],
-      )
+    Object.keys(userdata).length > 0 && Object.keys(userdata).forEach((k) => userdata[k] == null && delete userdata[k])
     let _data = { ...createUserValues, ...userdata, ...resumepath }
 
     _data.isDpAdded = true
@@ -111,9 +82,7 @@ const UploadDP = (props) => {
           autoDismiss: true,
         })
         sessionStorage.setItem('isDpAdded', true)
-        props.type !== 'inDashboard'
-          ? router.push('/job-preferences')
-          : props.hideModal()
+        props.type !== 'inDashboard' ? router.push('/job-preferences') : props.hideModal()
         if (props.isSuccessUpdated) props.isSuccessUpdated(4, 'finish')
       },
       onError: async () => {
@@ -127,22 +96,24 @@ const UploadDP = (props) => {
 
   return (
     <div className={Profile.authWrapper}>
-      {props.type != 'inDashboard' && (
-        <p className="title_size_text mt-3">{t('upload_profile_pic_text')}</p>
-      )}
+      {props.type != 'inDashboard' && <p className="title_size_text mt-3">{t('upload_profile_pic_text')}</p>}
 
       <Upload.Dragger
         accept=".jpeg,.png,.jpg"
-        customRequest={dummyRequest}
         {...inner_props}
+        onChange={(info) => {
+          if (info.file)
+            fileToBase64(info.file.originFileObj, (err, result) => {
+              if (result) {
+                const fileExtension = info.file.name.split('.').pop()
+                const ext = fileExtension
+                setFile(result)
+                setFileName(ext)
+              }
+            })
+        }}
       >
-        <svg
-          width="40"
-          height="40"
-          viewBox="0 0 40 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M28 28.5118V26.5271C28 25.4743 27.5786 24.4647 26.8284 23.7202C26.0783 22.9758 25.0609 22.5576 24 22.5576H16C14.9391 22.5576 13.9217 22.9758 13.1716 23.7202C12.4214 24.4647 12 25.4743 12 26.5271V28.5118"
             stroke="#D9D9D9"

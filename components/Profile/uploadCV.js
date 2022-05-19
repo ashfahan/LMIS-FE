@@ -44,10 +44,7 @@ const UploadCV = (props) => {
           padding: '30px',
         }}
       >
-        <Spin
-          size="large"
-          indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-        />
+        <Spin size="large" indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
       </div>
     )
 
@@ -128,9 +125,7 @@ const UploadCV = (props) => {
           }
           sessionStorage.setItem('isCVAdded', true)
           // typeof window !== "undefined" && sessionStorage.setItem("jobhop_loggedin_candidate_id", response);
-          props.type !== 'inDashboard'
-            ? props?.onSuccessAction()
-            : props.hideModal()
+          props.type !== 'inDashboard' ? props?.onSuccessAction() : props.hideModal()
         },
         onError: async (error) => {
           addToast('An Error Occured', {
@@ -145,27 +140,11 @@ const UploadCV = (props) => {
     }
   }
 
-  const dummyRequest = ({ onSuccess }) => {
-    setTimeout(() => onSuccess('ok'))
-  }
-
   return (
     <div className={Profile.authWrapper}>
-      {props.type != 'inDashboard' && (
-        <p className="title_size_text mt-3">{t('upload_cv_heading')}</p>
-      )}
-      <Dragger
-        accept=".docx,.pdf,.doc"
-        customRequest={dummyRequest}
-        {...inner_props}
-      >
-        <svg
-          width="40"
-          height="40"
-          viewBox="0 0 40 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+      {props.type != 'inDashboard' && <p className="title_size_text mt-3">{t('upload_cv_heading')}</p>}
+      <Dragger accept=".docx,.pdf,.doc" {...inner_props}>
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="20" cy="20" r="19" stroke="#D9D9D9" strokeWidth="2" />
           <path
             d="M21.9053 10H13.9053C13.3748 10 12.8661 10.2107 12.4911 10.5858C12.116 10.9609 11.9053 11.4696 11.9053 12V28C11.9053 28.5304 12.116 29.0391 12.4911 29.4142C12.8661 29.7893 13.3748 30 13.9053 30H25.9053C26.4357 30 26.9444 29.7893 27.3195 29.4142C27.6946 29.0391 27.9053 28.5304 27.9053 28V16L21.9053 10Z"
@@ -181,20 +160,8 @@ const UploadCV = (props) => {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <path
-            d="M23.9053 21H15.9053"
-            stroke="#D9D9D9"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M23.9053 25H15.9053"
-            stroke="#D9D9D9"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+          <path d="M23.9053 21H15.9053" stroke="#D9D9D9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M23.9053 25H15.9053" stroke="#D9D9D9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           <path
             d="M17.9053 17H16.9053H15.9053"
             stroke="#D9D9D9"
