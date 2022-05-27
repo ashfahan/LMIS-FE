@@ -1,9 +1,6 @@
 function addEducation() {
   let candiID = 0
-  if (
-    typeof window !== 'undefined' &&
-    sessionStorage.getItem('jobhop_loggedin_candidate_id')
-  ) {
+  if (typeof window !== 'undefined' && sessionStorage.getItem('jobhop_loggedin_candidate_id')) {
     candiID = sessionStorage.getItem('jobhop_loggedin_candidate_id')
   } else {
     candiID = 0
@@ -30,10 +27,7 @@ function addEducation() {
 
 function addExperience() {
   let candiID = 0
-  if (
-    typeof window !== 'undefined' &&
-    sessionStorage.getItem('jobhop_loggedin_candidate_id')
-  ) {
+  if (typeof window !== 'undefined' && sessionStorage.getItem('jobhop_loggedin_candidate_id')) {
     candiID = sessionStorage.getItem('jobhop_loggedin_candidate_id')
   } else {
     candiID = 0
@@ -66,10 +60,7 @@ function addExperience() {
 
 function saveJobPreferences() {
   let candiID = 0
-  if (
-    typeof window !== 'undefined' &&
-    sessionStorage.getItem('jobhop_loggedin_candidate_id')
-  ) {
+  if (typeof window !== 'undefined' && sessionStorage.getItem('jobhop_loggedin_candidate_id')) {
     candiID = sessionStorage.getItem('jobhop_loggedin_candidate_id')
   } else {
     candiID = 0

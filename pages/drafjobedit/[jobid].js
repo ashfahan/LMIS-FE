@@ -30,20 +30,15 @@ const DraftJobEdit = ({ jobid }) => {
 
   const { addToast } = useToasts()
   const { Title } = Typography
-  const { mutateAsync, isLoading_mutation, isSuccess } =
-    useMutation(PostJob_api)
+  const { mutateAsync, isLoading_mutation, isSuccess } = useMutation(PostJob_api)
   const [editorState, setEditorState] = useState('')
   const [company, setCompnay] = useState()
 
-  const { isLoading, error, data } = useQuery(
-    'getSingleJob',
-    () => getSingleJobsDraft(jobid),
-    {
-      onSuccess: async (response) => {
-        setJob(response)
-      },
+  const { isLoading, error, data } = useQuery('getSingleJob', () => getSingleJobsDraft(jobid), {
+    onSuccess: async (response) => {
+      setJob(response)
     },
-  )
+  })
 
   const postTheJob = (values) => {
     const interf = jobInterface()
@@ -122,10 +117,7 @@ const DraftJobEdit = ({ jobid }) => {
                   padding: '30px',
                 }}
               >
-                <Spin
-                  size="large"
-                  indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-                />
+                <Spin size="large" indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
               </div>
             )}
           </div>

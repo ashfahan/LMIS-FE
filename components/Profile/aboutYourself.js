@@ -177,7 +177,7 @@ const AboutYourself = (props) => {
 
           <h3 className={Profile.fontSmHead}>Update Your Resume</h3>
 
-          <a href={`data:application/pdf;base64,${data && data[0]?.resumePath}`} download="file.pdf">
+          <a href={`${data?.[0]?.resumePath}`} download="file.pdf">
             <Image className={Profile.profileImgContainer} width="60" height="60" src={pdf} alt="search" />
             <span className={Profile.fontSm} style={{ display: 'block' }}>
               Download Resume

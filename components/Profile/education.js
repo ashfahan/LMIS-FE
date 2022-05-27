@@ -21,11 +21,7 @@ const AddEducation = (props) => {
   const { data } = useQuery(
     'getCandidatesEducation',
     () =>
-      getCandidatesEducation(
-        props.candiID
-          ? props.candiID
-          : sessionStorage.getItem('jobhop_loggedin_candidate_id'),
-      ),
+      getCandidatesEducation(props.candiID ? props.candiID : sessionStorage.getItem('jobhop_loggedin_candidate_id')),
     {},
   )
 
@@ -67,9 +63,7 @@ const AddEducation = (props) => {
       values.educationalRecordsID = props.record_to_edit.educationalRecordsID
     }
     values.isEducationAdded = true
-    values.FK_UserId = parseInt(
-      sessionStorage.getItem('jobhop_loggedin_user_id'),
-    )
+    values.FK_UserId = parseInt(sessionStorage.getItem('jobhop_loggedin_user_id'))
 
     mutateAsync(values, {
       onSuccess: async () => {
@@ -113,17 +107,8 @@ const AddEducation = (props) => {
   }
 
   return (
-    <div
-      className={Profile.BiggerForms}
-      style={
-        props.type === 'inDashboard' ? { width: 'auto', marginTop: '0' } : {}
-      }
-    >
-      {props.type != 'inDashboard' && (
-        <p className={`title_size_text mt-3`}>
-          {t('add_your_education_details')}
-        </p>
-      )}
+    <div className={Profile.BiggerForms} style={props.type === 'inDashboard' ? { width: 'auto', marginTop: '0' } : {}}>
+      {props.type != 'inDashboard' && <p className={`title_size_text mt-3`}>{t('add_your_education_details')}</p>}
       <Form
         name="basic"
         layout="vertical"
@@ -134,34 +119,20 @@ const AddEducation = (props) => {
       >
         <Row gutter={30}>
           <Col span={12}>
-            <Form.Item
-              label={t('school')}
-              name="instituteID"
-              rules={[{ required: true }]}
-              hasFeedback
-            >
+            <Form.Item label={t('school')} name="instituteID" rules={[{ required: true }]} hasFeedback>
               <FetchSelectLookup
                 typeID={13}
                 onOptionSelect={onSelectInstitute}
-                selectedValue={
-                  props.editMode && props.record_to_edit.instituteName
-                }
+                selectedValue={props.editMode && props.record_to_edit.instituteName}
               />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item
-              label={t('degree')}
-              name="degreeID"
-              rules={[{ required: true }]}
-              hasFeedback
-            >
+            <Form.Item label={t('degree')} name="degreeID" rules={[{ required: true }]} hasFeedback>
               <FetchSelectLookup
                 typeID={14}
                 onOptionSelect={onSelectDegree}
-                selectedValue={
-                  props.editMode && props.record_to_edit.degreeName
-                }
+                selectedValue={props.editMode && props.record_to_edit.degreeName}
               />
             </Form.Item>
           </Col>
@@ -206,9 +177,7 @@ const AddEducation = (props) => {
                     if (!value || getFieldValue('startDate') < value) {
                       return Promise.resolve()
                     }
-                    return Promise.reject(
-                      'start date must be greater than end date',
-                    )
+                    return Promise.reject('start date must be greater than end date')
                   },
                 }),
               ]}
@@ -228,22 +197,10 @@ const AddEducation = (props) => {
           </Col>
         </Row>
         <Form.Item>
-          <Button
-            type="primary"
-            loading={isLoading}
-            htmlType="submit"
-            style={{ marginBottom: '15px' }}
-          >
-            {props.editMode
-              ? t('edit') + ' ' + t('Education')
-              : t('add_education')}
+          <Button type="primary" loading={isLoading} htmlType="submit" style={{ marginBottom: '15px' }}>
+            {props.editMode ? t('edit') + ' ' + t('Education') : t('add_education')}
           </Button>
-          {props.type != 'inDashboard' && (
-            <Educationadded
-              type="inProcessProfile"
-              isIncomplete={handleIncomplete}
-            />
-          )}
+          {props.type != 'inDashboard' && <Educationadded type="inProcessProfile" isIncomplete={handleIncomplete} />}
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {props.type != 'inDashboard' && (
               <div className="skip_back_options" style={{ paddingTop: '10px' }}>

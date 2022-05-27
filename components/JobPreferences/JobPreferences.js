@@ -132,18 +132,6 @@ const JobPreferencesSub = (props) => {
             />
           </Form.Item>
 
-          {/* <Form.Item
-                  name="job_title"
-                  label={t("pref_label_1")}
-                  rules={[{ required: true }]} >
-                    <Input size="large" placeholder={t("perf_input1_placeholder")} />
-                </Form.Item> */}
-          {/* <Form.Item
-                  name="job_location"
-                  label={t("pref_label_2")}
-                  rules={[{ required: true }]} >
-                    <Input size="large" placeholder={t("perf_input2_placeholder")} />
-                </Form.Item> */}
           <Form.Item name="expectedSalary" label={`${t('pref_label_3')} (LYD)`}>
             <span className={Profile.salaryRange}>
               {minRange}K - {maxRange}K
@@ -155,9 +143,10 @@ const JobPreferencesSub = (props) => {
               defaultValue={[minRange, maxRange]}
             />
           </Form.Item>
-          <p style={{ marginBottom: '30px' }}>
+
+          <Form.Item name="remote" style={{ marginBottom: '30px' }}>
             <Switch size="small" /> &nbsp;{t('perf_salary_range')}
-          </p>
+          </Form.Item>
 
           <Button loading={isLoading} type="primary" block htmlType="submit">
             {props.editMode ? t('pref_button_2') : t('pref_button_1')}

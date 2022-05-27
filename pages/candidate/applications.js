@@ -19,22 +19,13 @@ const CandidateApplications = () => {
   const router = useRouter()
   const { t } = useTranslation()
   const [language, setLanguage] = useState('en')
-  let appLanguage =
-    typeof window !== 'undefined' && sessionStorage.getItem('i18nextLng')
+  let appLanguage = typeof window !== 'undefined' && sessionStorage.getItem('i18nextLng')
   useEffect(() => {
     setLanguage(appLanguage)
   }, [appLanguage])
-  useEffect(() => {
-    if (userType != 1) {
-      router.push('/')
-    }
-  }, [])
 
   const { isLoading, error, data } = useQuery('getApplicationsApplied', () =>
-    getApplicationsApplied(
-      typeof window !== 'undefined' &&
-        sessionStorage.getItem('jobhop_loggedin_candidate_id'),
-    ),
+    getApplicationsApplied(typeof window !== 'undefined' && sessionStorage.getItem('jobhop_loggedin_candidate_id')),
   )
 
   return (
@@ -46,28 +37,16 @@ const CandidateApplications = () => {
         </Col>
         <Col lg={20} xs={24}>
           <Row gutter={30} style={{ margin: '0', padding: '20px' }}>
-            <h2 style={{ display: 'block', width: '100%', padding: '20px' }}>
-              {t('application_page_heading')}
-            </h2>
+            <h2 style={{ display: 'block', width: '100%', padding: '20px' }}>{t('application_page_heading')}</h2>
 
             {data && data.length ? (
               data.map((job) => {
                 return (
-                  <Col
-                    lg={8}
-                    md={{ span: 12, offset: 0 }}
-                    sm={{ span: 18, offset: 3 }}
-                    xs={24}
-                    key={Math.random}
-                  >
+                  <Col lg={8} md={{ span: 12, offset: 0 }} sm={{ span: 18, offset: 3 }} xs={24} key={Math.random}>
                     <Link href={`/singlejob/${job.fk_JobVacancyID}`}>
                       <div className={Style.empDashJobsCard}>
                         <SingleJobCard
-                          title={
-                            language === 'en'
-                              ? job.jobtitleNameEn
-                              : job.jobtitleNameAr
-                          }
+                          title={language === 'en' ? job.jobtitleNameEn : job.jobtitleNameAr}
                           company={job.companyName}
                           location={job.city}
                           isDraft={false}
@@ -90,10 +69,7 @@ const CandidateApplications = () => {
                   padding: '30px',
                 }}
               >
-                <Spin
-                  size="large"
-                  indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-                />
+                <Spin size="large" indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
               </div>
             ) : (
               <Empty description="No active jobs" />
