@@ -57,7 +57,9 @@ function Dropdown({ fetchOptions, debounceTimeout = 800, bordered = true, i18n: 
 const DebounceSelect = withTranslation()(Dropdown)
 
 async function fetchUserList(username, typeID) {
-  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/LKP/GetAllLookUpValues_ByFK_LookUpId?FK_LookUpId=${typeID}`)
+  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/LKP/GetAllLookUpValues_ByFK_LookUpId?FK_LookUpId=${typeID}`, {
+    headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}` },
+  })
     .then((response) => response.json())
     .then((body) =>
       body.map((user) => ({
@@ -94,7 +96,9 @@ const FetchSelectLookup = ({ typeID, onOptionSelect, selectedValue, defaultValue
 }
 
 async function fetchEmploymentType(username, typeID) {
-  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/LKP/GetAllLookUpValues_ByFK_LookUpId?FK_LookUpId=${typeID}`)
+  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/LKP/GetAllLookUpValues_ByFK_LookUpId?FK_LookUpId=${typeID}`, {
+    headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}` },
+  })
     .then((response) => response.json())
     .then((body) =>
       body.map((user) => ({

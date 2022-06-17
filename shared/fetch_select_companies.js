@@ -61,7 +61,9 @@ function Dropdown({ fetchOptions, i18n: { language }, debounceTimeout = 800, ...
 const DebounceSelect = withTranslation()(Dropdown)
 
 async function fetchUserList() {
-  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/Common/GetAllCompany`)
+  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/Common/GetAllCompany`, {
+    headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}` },
+  })
     .then((response) => response.json())
     .then((body) =>
       body.map((user) => ({

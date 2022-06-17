@@ -54,7 +54,9 @@ function Dropdown({ fetchOptions, debounceTimeout = 800, i18n: { language }, ...
 const DebounceSelect = withTranslation()(Dropdown)
 
 async function fetchUserList(username) {
-  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/RoleManagement/GetRoles`)
+  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/RoleManagement/GetRoles`, {
+    headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}` },
+  })
     .then((response) => response.json())
     .then((body) =>
       body.map((user) => ({
