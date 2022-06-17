@@ -39,7 +39,6 @@ export const signInUsre = async (data) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
       },
       body: JSON.stringify(data),
     })
