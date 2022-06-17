@@ -1,13 +1,11 @@
 export const getCandidates = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/Candidates/GetAllCandidates`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Candidates/GetAllCandidates`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
     },
-  )
+  })
 
   if (!response.ok) {
     throw new Error(response.json().message)
@@ -23,6 +21,7 @@ export const getSingleCandidate = async (candidateId) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
       },
     },
   )
@@ -35,15 +34,13 @@ export const getSingleCandidate = async (candidateId) => {
 }
 
 export const getSingleUser = async (candidateId) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/Users/GetApplicationUser?UserId=${candidateId}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Users/GetApplicationUser?UserId=${candidateId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
     },
-  )
+  })
 
   if (!response.ok) {
     throw new Error(response.json().message)
@@ -59,6 +56,7 @@ export const getSingleJobPreferences = async (candidateId) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
       },
     },
   )
@@ -77,6 +75,7 @@ export const getCandidatesEducation = async (cadndiid) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
       },
     },
   )
@@ -95,6 +94,7 @@ export const getCandidatesExperience = async (cadndiid) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
       },
     },
   )
@@ -113,6 +113,7 @@ export const deleteCandidateEducation = async (data) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
       },
     },
   )
@@ -131,6 +132,7 @@ export const deleteCandidateExperience = async (data) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
       },
     },
   )
@@ -149,6 +151,7 @@ export const getCandidateShortlistedJobs = async (candidateID) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
       },
     },
   )
@@ -165,6 +168,7 @@ export const getCandidateApprovedJobs = async (candidateID) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
       },
     },
   )
@@ -181,6 +185,7 @@ export const getCandidateRejectedJobs = async (candidateID) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
       },
     },
   )
@@ -197,6 +202,7 @@ export const getApplicationsApplied = async (candidateID) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
       },
     },
   )

@@ -1,13 +1,11 @@
 export const getJobs = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/Job/GetAllJobVacancy`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Job/GetAllJobVacancy`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
     },
-  )
+  })
 
   if (!response.ok) {
     throw 'Error'
@@ -17,16 +15,14 @@ export const getJobs = async () => {
 }
 
 export const getJobsByFilter = async (data) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/Dashboard/GetJobsByFilters`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Dashboard/GetJobsByFilters`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
     },
-  )
+    body: JSON.stringify(data),
+  })
 
   if (!response.ok) {
     throw 'Error'
@@ -42,6 +38,7 @@ export const getLookupTableValue = async (typeID) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
       },
       body: JSON.stringify(data),
     },
@@ -54,15 +51,13 @@ export const getLookupTableValue = async (typeID) => {
 }
 
 export const getDraftJobs = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/Job/GetAllJobVacancy_Draft`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Job/GetAllJobVacancy_Draft`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
     },
-  )
+  })
 
   if (!response.ok) {
     throw new Error(response.json().message)
@@ -72,15 +67,13 @@ export const getDraftJobs = async () => {
 }
 
 export const getSingleJobs = async (jobid) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/Job/GetJobVacancy_byID?JobVacancyId=${jobid}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Job/GetJobVacancy_byID?JobVacancyId=${jobid}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
     },
-  )
+  })
 
   if (!response.ok) {
     throw new Error(response.json().message)
@@ -90,15 +83,13 @@ export const getSingleJobs = async (jobid) => {
 }
 
 export const getSingleJobsDraft = async (jobid) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/Job/GetJobVacancyDraft_byID?JobVacancyId=${jobid}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Job/GetJobVacancyDraft_byID?JobVacancyId=${jobid}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
     },
-  )
+  })
 
   if (!response.ok) {
     throw new Error(response.json().message)
@@ -112,6 +103,7 @@ export const getOverView = async (url) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
     },
   })
 
@@ -123,16 +115,14 @@ export const getOverView = async (url) => {
 }
 
 export const PostJob_api = async (data) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/Job/SaveJobVacancy`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Job/SaveJobVacancy`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
     },
-  )
+    body: JSON.stringify(data),
+  })
 
   if (!response.ok) {
     throw 'Error'
@@ -142,16 +132,14 @@ export const PostJob_api = async (data) => {
 }
 
 export const SavePreferences = async (data) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/Job/SaveJobPrefrances`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Job/SaveJobPrefrances`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
     },
-  )
+    body: JSON.stringify(data),
+  })
 
   if (!response.ok) {
     throw 'Error'
@@ -161,15 +149,13 @@ export const SavePreferences = async (data) => {
 }
 
 export const GetPreferences = async (id) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/Job/GetJobPrefrances_byID?JobPrefrancesID=${id}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Job/GetJobPrefrances_byID?JobPrefrancesID=${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
     },
-  )
+  })
 
   if (!response.ok) {
     throw new Error(response.json().message)
@@ -179,16 +165,14 @@ export const GetPreferences = async (id) => {
 }
 
 export const applyToAJob = async (data) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/Job/SaveJobApplications`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Job/SaveJobApplications`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
     },
-  )
+    body: JSON.stringify(data),
+  })
 
   if (!response.ok) {
     throw new Error(response.json().message)
@@ -204,6 +188,7 @@ export const getApplicantsByJobID = async (jobid) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
       },
     },
   )
@@ -216,15 +201,13 @@ export const getApplicantsByJobID = async (jobid) => {
 }
 
 export const getAllFilters = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/Dashboard/GetFilters`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Dashboard/GetFilters`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
     },
-  )
+  })
 
   if (!response.ok) {
     throw 'Error'
