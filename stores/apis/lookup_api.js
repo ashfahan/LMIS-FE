@@ -86,6 +86,8 @@ export const getJobByCity = async () => {
     },
   })
 
+
+  
   if (!response.ok) {
     throw 'Error'
   }
