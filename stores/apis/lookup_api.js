@@ -3,7 +3,9 @@ export const getAllCompanies = async () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
   })
 
@@ -18,7 +20,9 @@ export const getallAssignedRoles = async () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
   })
 
@@ -34,7 +38,9 @@ export const getAllRoles = async () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
   })
 
@@ -51,7 +57,9 @@ export const getLookups = async (lkpid) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+        ...(JSON.parse(localStorage.getItem('auth')).token && {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+        }),
       },
     },
   )
@@ -67,7 +75,9 @@ export const getAllPermission = async () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
   })
 
@@ -82,12 +92,12 @@ export const getJobByCity = async () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
   })
 
-
-  
   if (!response.ok) {
     throw 'Error'
   }
@@ -100,7 +110,9 @@ export const getJobByIndustry = async () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
   })
 
@@ -116,7 +128,9 @@ export const getJobByCompany = async () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
   })
 
@@ -132,7 +146,9 @@ export const PostLookupValue = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
     body: JSON.stringify(data),
   })
@@ -149,7 +165,9 @@ export const PostCompanyValue = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
     body: JSON.stringify(data),
   })
@@ -165,7 +183,9 @@ export const addUpdateUserRoles = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
     body: JSON.stringify(data),
   })
@@ -182,7 +202,9 @@ export const deleteRole = async (id) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
   })
 
@@ -200,7 +222,9 @@ export const assignRole = async (data) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+        ...(JSON.parse(localStorage.getItem('auth')).token && {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+        }),
       },
     },
   )
@@ -216,7 +240,9 @@ export const DeleteCompany = async (data) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
   })
 
@@ -234,7 +260,9 @@ export const DeleteLookup = async (data) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+        ...(JSON.parse(localStorage.getItem('auth')).token && {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+        }),
       },
     },
   )

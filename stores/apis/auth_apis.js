@@ -3,7 +3,9 @@ export const createUser = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
     body: JSON.stringify(data),
   })
@@ -21,7 +23,9 @@ export const createCandidate = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
     body: JSON.stringify(data),
   })
@@ -34,6 +38,7 @@ export const createCandidate = async (data) => {
 }
 
 export const signInUsre = async (data) => {
+  console.log('here stsart')
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Security/LoginUser`, {
       method: 'POST',
@@ -42,17 +47,26 @@ export const signInUsre = async (data) => {
       },
       body: JSON.stringify(data),
     })
+
+    console.log('here', user, resp)
+
     if (!response.ok) {
       throw 'Error'
     }
-    console.log('here')
+    console.log('here', user, resp)
 
     const resp = await response.json()
 
-    console.log(resp)
+    const user = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Users/GetUserByToken`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${resp.token}`,
+      },
+    })
 
     localStorage.setItem('auth', JSON.stringify(resp))
-    return resp
+    return user
   } catch (err) {
     throw 'Error'
   }
@@ -63,7 +77,9 @@ export const linkedInLogin = async (data) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+        ...(JSON.parse(localStorage.getItem('auth')).token && {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+        }),
       },
       body: JSON.stringify(data),
     })
@@ -80,7 +96,9 @@ export const forgotPassword = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
     body: JSON.stringify(data),
   })
@@ -97,7 +115,9 @@ export const newPassword = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
     body: JSON.stringify(data),
   })
@@ -114,7 +134,9 @@ export const addEducationApi = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
     body: JSON.stringify(data),
   })
@@ -131,7 +153,9 @@ export const addExperienceApi = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
     },
     body: JSON.stringify(data),
   })

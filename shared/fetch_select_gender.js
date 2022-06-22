@@ -5,7 +5,11 @@ import { withTranslation } from 'react-i18next'
 
 async function fetchUserList(username, typeID) {
   return fetch(`${process.env.NEXT_PUBLIC_API_URL}/LKP/GetAllLookUpValues_ByFK_LookUpId?FK_LookUpId=${typeID}`, {
-    headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}` },
+    headers: {
+      ...(JSON.parse(localStorage.getItem('auth')).token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      }),
+    },
   })
     .then((response) => response.json())
     .then((body) =>

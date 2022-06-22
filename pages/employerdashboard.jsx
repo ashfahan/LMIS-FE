@@ -7,7 +7,6 @@ import { useMutation } from 'react-query'
 import { useToasts } from 'react-toast-notifications'
 import EmpDashSidebar from '../components/Dashboard/employer/empDashSidebar'
 import Navigation from '../components/Layout/header'
-import auth from '../shared/auth'
 import { permissionsEnum } from '../shared/permissionsEnum'
 import { getOverView } from '../stores/apis/jobs_api'
 
@@ -24,9 +23,9 @@ export const EmployerDashboard = () => {
   const { mutateAsync, isLoading, isSuccess, error, data } = useMutation(getOverView)
 
   useEffect(() => {
-    if (!auth()) {
-      router.push('/')
-    }
+    // if (!auth()) {
+    //   router.push('/')
+    // }
     let _permissions = JSON.parse(sessionStorage.getItem('permissions')) || []
     setIsPostJobVisible(_permissions.some((item) => item === permissionsEnum.postAJob))
   }, [])
