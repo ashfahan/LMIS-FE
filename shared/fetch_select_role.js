@@ -56,8 +56,8 @@ const DebounceSelect = withTranslation()(Dropdown)
 async function fetchUserList(username) {
   return fetch(`${process.env.NEXT_PUBLIC_API_URL}/RoleManagement/GetRoles`, {
     headers: {
-      ...(JSON.parse(localStorage.getItem('auth')).token && {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth'))?.token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth'))?.token}`,
       }),
     },
   })

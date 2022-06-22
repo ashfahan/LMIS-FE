@@ -60,8 +60,8 @@ async function fetchUserList(username, typeID) {
   console.log('auth')
   return fetch(`${process.env.NEXT_PUBLIC_API_URL}/LKP/GetAllLookUpValues_ByFK_LookUpId?FK_LookUpId=${typeID}`, {
     headers: {
-      ...(JSON.parse(localStorage.getItem('auth')).token && {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth'))?.token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth'))?.token}`,
       }),
     },
   })
@@ -103,8 +103,8 @@ const FetchSelectLookup = ({ typeID, onOptionSelect, selectedValue, defaultValue
 async function fetchEmploymentType(username, typeID) {
   return fetch(`${process.env.NEXT_PUBLIC_API_URL}/LKP/GetAllLookUpValues_ByFK_LookUpId?FK_LookUpId=${typeID}`, {
     headers: {
-      ...(JSON.parse(localStorage.getItem('auth')).token && {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth'))?.token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth'))?.token}`,
       }),
     },
   })

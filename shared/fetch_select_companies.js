@@ -63,8 +63,8 @@ const DebounceSelect = withTranslation()(Dropdown)
 async function fetchUserList() {
   return fetch(`${process.env.NEXT_PUBLIC_API_URL}/Common/GetAllCompany`, {
     headers: {
-      ...(JSON.parse(localStorage.getItem('auth')).token && {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth'))?.token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth'))?.token}`,
       }),
     },
   })

@@ -3,8 +3,8 @@ export const createUser = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(JSON.parse(localStorage.getItem('auth')).token && {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth'))?.token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth'))?.token}`,
       }),
     },
     body: JSON.stringify(data),
@@ -23,8 +23,8 @@ export const createCandidate = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(JSON.parse(localStorage.getItem('auth')).token && {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth'))?.token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth'))?.token}`,
       }),
     },
     body: JSON.stringify(data),
@@ -77,8 +77,8 @@ export const linkedInLogin = async (data) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        ...(JSON.parse(localStorage.getItem('auth')).token && {
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+        ...(JSON.parse(localStorage.getItem('auth'))?.token && {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth'))?.token}`,
         }),
       },
       body: JSON.stringify(data),
@@ -96,8 +96,8 @@ export const forgotPassword = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(JSON.parse(localStorage.getItem('auth')).token && {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth'))?.token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth'))?.token}`,
       }),
     },
     body: JSON.stringify(data),
@@ -115,8 +115,8 @@ export const newPassword = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(JSON.parse(localStorage.getItem('auth')).token && {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth'))?.token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth'))?.token}`,
       }),
     },
     body: JSON.stringify(data),
@@ -134,8 +134,8 @@ export const addEducationApi = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(JSON.parse(localStorage.getItem('auth')).token && {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth'))?.token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth'))?.token}`,
       }),
     },
     body: JSON.stringify(data),
@@ -153,8 +153,8 @@ export const addExperienceApi = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(JSON.parse(localStorage.getItem('auth')).token && {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')).token}`,
+      ...(JSON.parse(localStorage.getItem('auth'))?.token && {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth'))?.token}`,
       }),
     },
     body: JSON.stringify(data),
