@@ -15,8 +15,7 @@ const SignIn = () => {
   const [userT, setUserT] = useRecoilState(userTypeAtom)
 
   const { mutateAsync, isLoading, isSuccess } = useMutation(signInUsre)
-  const { mutateAsync: linkedInMutateAsync, isLoading: linkedInLoading } =
-    useMutation(linkedInLogin)
+  const { mutateAsync: linkedInMutateAsync, isLoading: linkedInLoading } = useMutation(linkedInLogin)
   const router = useRouter()
   const { addToast } = useToasts()
   const { t } = useTranslation()
@@ -32,49 +31,15 @@ const SignIn = () => {
             autoDismiss: true,
           })
           if (typeof window !== 'undefined') {
-            sessionStorage.setItem(
-              'isDpAdded',
-              JSON.stringify(response.user.isDpAdded),
-            )
-            sessionStorage.setItem(
-              'isCVAdded',
-              JSON.stringify(response.user.isCVAdded),
-            )
-
-            sessionStorage.setItem(
-              'isBioAdded',
-              JSON.stringify(response.user.isBioAdded),
-            )
-
-            sessionStorage.setItem(
-              'isEducationAdded',
-              JSON.stringify(response.user.isEducationAdded),
-            )
-
-            sessionStorage.setItem(
-              'isExperienceAdded',
-              JSON.stringify(response.user.isExperienceAdded),
-            )
-
-            sessionStorage.setItem(
-              'jobhop_loggedin_user',
-              JSON.stringify(response),
-            )
-
-            sessionStorage.setItem(
-              'jobhop_loggedin_candidate_id',
-              response.candidateID,
-            )
-
-            sessionStorage.setItem(
-              'jobhop_loggedin_user_type',
-              response.userType,
-            )
-
-            sessionStorage.setItem(
-              'jobhop_loggedin_user_type',
-              response.userType,
-            )
+            sessionStorage.setItem('isDpAdded', JSON.stringify(response.user?.isDpAdded))
+            sessionStorage.setItem('isCVAdded', JSON.stringify(response.user?.isCVAdded))
+            sessionStorage.setItem('isBioAdded', JSON.stringify(response.user?.isBioAdded))
+            sessionStorage.setItem('isEducationAdded', JSON.stringify(response.user?.isEducationAdded))
+            sessionStorage.setItem('isExperienceAdded', JSON.stringify(response.user?.isExperienceAdded))
+            sessionStorage.setItem('jobhop_loggedin_user', JSON.stringify(response))
+            sessionStorage.setItem('jobhop_loggedin_candidate_id', response.candidateID)
+            sessionStorage.setItem('jobhop_loggedin_user_type', response.userType)
+            sessionStorage.setItem('jobhop_loggedin_user_type', response.userType)
             sessionStorage.setItem('jobhop_loggedin_user_id', response.userId)
           }
 
@@ -113,12 +78,8 @@ const SignIn = () => {
   }
 
   return (
-    <div
-      className={[styles.auth_fields_wrapper, styles.signup_splash].join(' ')}
-    >
-      <div
-        className={[styles.auth_fields_wrapper, styles.signup_fields].join(' ')}
-      >
+    <div className={[styles.auth_fields_wrapper, styles.signup_splash].join(' ')}>
+      <div className={[styles.auth_fields_wrapper, styles.signup_fields].join(' ')}>
         <p>Please Login</p>
 
         <Form
@@ -146,9 +107,7 @@ const SignIn = () => {
               noStyle
               name="password"
               validateTrigger="onSubmit"
-              rules={[
-                { required: true, message: 'Password is required', min: 8 },
-              ]}
+              rules={[{ required: true, message: 'Password is required', min: 8 }]}
             >
               <Input.Password size="large" placeholder="••••••••" />
             </Form.Item>
@@ -170,13 +129,7 @@ const SignIn = () => {
       <a onClick={handleLinkedInLogin}>
         <>
           <a className="btn_auth_signup">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M21.829 0H2.17099C0.972 0 0 0.972 0 2.17099V21.8289C0 23.028 0.972 24 2.17099 24H21.8289C23.028 24 24 23.028 24 21.8289V2.17099C24 0.972 23.028 0 21.829 0ZM7.42662 20.7232C7.42662 21.0721 7.14377 21.355 6.79483 21.355H4.10544C3.7565 21.355 3.47365 21.0721 3.47365 20.7232V9.4494C3.47365 9.10046 3.7565 8.81761 4.10544 8.81761H6.79483C7.14377 8.81761 7.42662 9.10046 7.42662 9.4494V20.7232ZM5.45014 7.75489C4.0391 7.75489 2.8952 6.61099 2.8952 5.19996C2.8952 3.78892 4.0391 2.64503 5.45014 2.64503C6.86117 2.64503 8.00507 3.78892 8.00507 5.19996C8.00507 6.61099 6.86124 7.75489 5.45014 7.75489ZM21.4813 20.7741C21.4813 21.0949 21.2212 21.355 20.9004 21.355H18.0145C17.6937 21.355 17.4335 21.0949 17.4335 20.7741V15.486C17.4335 14.6972 17.6649 12.0292 15.372 12.0292C13.5934 12.0292 13.2327 13.8553 13.1602 14.6749V20.7741C13.1602 21.0949 12.9002 21.355 12.5793 21.355H9.78817C9.46737 21.355 9.20727 21.0949 9.20727 20.7741V9.39851C9.20727 9.07772 9.46737 8.81761 9.78817 8.81761H12.5793C12.9001 8.81761 13.1602 9.07772 13.1602 9.39851V10.3821C13.8197 9.39236 14.7998 8.62844 16.8866 8.62844C21.5077 8.62844 21.4813 12.9457 21.4813 15.3178V20.7741Z"
                 fill="#0077B7"
@@ -184,10 +137,7 @@ const SignIn = () => {
             </svg>
             <p>
               {linkedInLoading ? (
-                <Spin
-                  size="small"
-                  indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-                />
+                <Spin size="small" indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
               ) : (
                 t('signup_with_linkedin')
               )}
