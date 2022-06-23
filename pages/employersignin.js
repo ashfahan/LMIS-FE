@@ -24,6 +24,7 @@ export default function Signup() {
     // values.userType = 1;
     mutateAsync(values, {
       onSuccess: async (response) => {
+        response = await response.json()
         if (response.userId !== 0) {
           addToast('Logged in Successfully', {
             appearance: 'success',
