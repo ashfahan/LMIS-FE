@@ -1,5 +1,5 @@
 export const createUser = async (data) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Users/CreateApplicationUser`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/security/CreateApplicationUser`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -11,8 +11,10 @@ export const createUser = async (data) => {
   })
 
   if (!response.ok) {
-    let _result = await response.json()
-    throw _result.message
+    let _result = await response.json().catch((e) => {
+      throw 'Error'
+    })
+    throw _result?.message
   }
 
   return response.json()

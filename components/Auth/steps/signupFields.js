@@ -11,12 +11,7 @@ import { isLoggedIn } from '../../../stores/atoms/app_config_atom'
 import { createUserInterface } from '../../../stores/interfaces/auth'
 import styles from '../../../styles/auth.module.scss'
 
-const SignupFields = ({
-  formTitle,
-  userType = 1,
-  closeModal,
-  isModalVisible,
-}) => {
+const SignupFields = ({ formTitle, userType = 1, closeModal, isModalVisible }) => {
   const { addToast } = useToasts()
   const { mutateAsync, isLoading, isSuccess } = useMutation(createUser)
   const router = useRouter()
@@ -43,18 +38,9 @@ const SignupFields = ({
           autoDismiss: true,
         })
         if (userType === 0) return
-        typeof window !== 'undefined' &&
-          sessionStorage.setItem(
-            'jobhop_loggedin_user_id',
-            response.split('&')[0],
-          )
-        typeof window !== 'undefined' &&
-          sessionStorage.setItem(
-            'jobhop_loggedin_candidate_id',
-            response.split('&')[1],
-          )
-        typeof window !== 'undefined' &&
-          sessionStorage.setItem('jobhop_loggedin_user_type', 1)
+        typeof window !== 'undefined' && sessionStorage.setItem('jobhop_loggedin_user_id', response.split('&')[0])
+        typeof window !== 'undefined' && sessionStorage.setItem('jobhop_loggedin_candidate_id', response.split('&')[1])
+        typeof window !== 'undefined' && sessionStorage.setItem('jobhop_loggedin_user_type', 1)
         router.push('/profile')
         setSignin(true)
       },
@@ -67,12 +53,7 @@ const SignupFields = ({
     })
   }
   return (
-    <div
-      className={[
-        !isModalVisible && styles.auth_fields_wrapper,
-        styles.signup_fields,
-      ].join(' ')}
-    >
+    <div className={[!isModalVisible && styles.auth_fields_wrapper, styles.signup_fields].join(' ')}>
       <p>{formTitle}</p>
       <Form
         name="basic"
@@ -91,11 +72,7 @@ const SignupFields = ({
           <Input name="name" size="large" placeholder="Bruce Wayne" />
         </Form.Item>
 
-        <Form.Item
-          label={t('email')}
-          name="userEmail"
-          rules={[{ required: true, type: 'email' }]}
-        >
+        <Form.Item label={t('email')} name="userEmail" rules={[{ required: true, type: 'email' }]}>
           <Input name="email" size="large" placeholder="bruce@wayne.com" />
         </Form.Item>
 
@@ -110,11 +87,7 @@ const SignupFields = ({
             },
           ]}
         >
-          <Input.Password
-            name="password"
-            size="large"
-            placeholder="Atleast 8 charachters"
-          />
+          <Input.Password name="password" size="large" placeholder="Atleast 8 charachters" />
         </Form.Item>
         <Form.Item
           label={t('phone')}
