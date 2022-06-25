@@ -40,7 +40,7 @@ const SignupFields = ({ formTitle, userType = 1, closeModal, isModalVisible }) =
         })
         if (userType === 0) return
         typeof window !== 'undefined' && sessionStorage.setItem('jobhop_loggedin_user_id', response.userId)
-        typeof window !== 'undefined' && sessionStorage.setItem('jobhop_logge din_candidate_id', response.candidateId)
+        typeof window !== 'undefined' && sessionStorage.setItem('jobhop_loggedin_candidate_id', response.candidateId)
         typeof window !== 'undefined' && sessionStorage.setItem('jobhop_loggedin_user_type', 1)
         router.push('/profile')
         setSignin(true)
