@@ -25,6 +25,7 @@ const SignupFields = ({ formTitle, userType = 1, closeModal, isModalVisible }) =
     values.userType = userType
     mutateAsync(values, {
       onSuccess: async (response) => {
+        console.log(response)
         if (response === 'Error') {
           addToast('Error occur while creating account', {
             appearance: 'error',
@@ -38,14 +39,15 @@ const SignupFields = ({ formTitle, userType = 1, closeModal, isModalVisible }) =
           autoDismiss: true,
         })
         if (userType === 0) return
-        typeof window !== 'undefined' && sessionStorage.setItem('jobhop_loggedin_user_id', response.split('&')[0])
-        typeof window !== 'undefined' && sessionStorage.setItem('jobhop_loggedin_candidate_id', response.split('&')[1])
+        typeof window !== 'undefined' && sessionStorage.setItem('jobhop_loggedin_user_id', response.userId)
+        typeof window !== 'undefined' && sessionStorage.setItem('jobhop_logge din_candidate_id', response.candidateId)
         typeof window !== 'undefined' && sessionStorage.setItem('jobhop_loggedin_user_type', 1)
         router.push('/profile')
         setSignin(true)
       },
       onError: (error) => {
-        addToast(error, {
+        console.log(error)
+        addToast('error', {
           appearance: 'error',
           autoDismiss: true,
         })

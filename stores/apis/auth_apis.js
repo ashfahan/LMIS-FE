@@ -17,7 +17,19 @@ export const createUser = async (data) => {
     throw _result?.message
   }
 
-  return response.json()
+  const resp = await response.json()
+
+  const user = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Users/GetUserByToken`, {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${resp.token}`,
+    },
+  })
+
+  localStorage.setItem('auth', JSON.stringify(resp))
+
+  return await user.json()
 }
 
 export const createCandidate = async (data) => {
@@ -50,12 +62,9 @@ export const signInUsre = async (data) => {
       body: JSON.stringify(data),
     })
 
-    console.log('here', user, resp)
-
     if (!response.ok) {
       throw 'Error'
     }
-    console.log('here', user, resp)
 
     const resp = await response.json()
 
@@ -68,7 +77,7 @@ export const signInUsre = async (data) => {
     })
 
     localStorage.setItem('auth', JSON.stringify(resp))
-    return user
+    return await user.json()
   } catch (err) {
     throw 'Error'
   }
