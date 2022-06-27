@@ -1,5 +1,5 @@
 import { LeftOutlined, LoadingOutlined } from '@ant-design/icons'
-import { Empty, Spin } from 'antd'
+import { Spin } from 'antd'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -16,11 +16,9 @@ const JobsList = () => {
   const JobFiltersInline = useRecoilValue(JobFilters)
   const [jobs, setJobs] = useRecoilState(allJobs)
   const [filterJob, setFilterJob] = useState([])
-  const { mutateAsync, isLoading, error, isSuccess } =
-    useMutation(getJobsByFilter)
+  const { mutateAsync, isLoading, error, isSuccess } = useMutation(getJobsByFilter)
   const [language, setLanguage] = useState('en')
-  let appLanguage =
-    typeof window !== 'undefined' && sessionStorage.getItem('i18nextLng')
+  let appLanguage = typeof window !== 'undefined' && sessionStorage.getItem('i18nextLng')
 
   useEffect(() => {
     setLanguage(appLanguage)
@@ -28,15 +26,10 @@ const JobsList = () => {
 
   useEffect(async () => {
     let _filter = { ...JobFiltersInline }
-    _filter.candidateId = parseInt(
-      sessionStorage.getItem('jobhop_loggedin_candidate_id'),
-    )
+    _filter.candidateId = parseInt(sessionStorage.getItem('jobhop_loggedin_candidate_id'))
     mutateAsync(_filter, {
       onSuccess: async (responce) => {
-        let _jobs = responce?.filter(
-          (job) =>
-            job.draft === false && new Date(job.lateDatetoApply) >= new Date(),
-        )
+        let _jobs = responce?.filter((job) => job.draft === false && new Date(job.lateDatetoApply) >= new Date())
         responce && setJobs(_jobs)
         responce && setFilterJob(_jobs)
         responce && _jobs.length > 0 ? setJob(_jobs?.[0]) : setJob({})
@@ -57,10 +50,7 @@ const JobsList = () => {
           padding: '30px',
         }}
       >
-        <Spin
-          size="large"
-          indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-        />
+        <Spin size="large" indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
       </div>
     )
   }
@@ -83,87 +73,61 @@ const JobsList = () => {
             cursor: 'pointer',
           }}
         >
-          <LeftOutlined className={Style.icon} />{' '}
-          <span className={Style.backText}>BACK</span>
+          <LeftOutlined className={Style.icon} /> <span className={Style.backText}>BACK</span>
         </div>
       </Link>
       <div className={Style.listOfJobs}>
         <ul>
-          {jobs && jobs.length > 0 ? (
-            jobs.map((job, i) => {
-              return (
-                <>
-                  <li
-                    key={i}
-                    className={`${[
-                      Style.listItemJobs,
-                      i === current ? Style.itemActive : '',
-                    ].join(' ')} ${Style.desktop_jobs_listing} ${
-                      StyleDashboard.overLay
-                    }`}
-                    onClick={() => onSingleJobSelect(job, i)}
-                  >
-                    <strong>
-                      {language === 'en' ? job.lookUpValue : job.lookUpValue_Ar}
-                    </strong>
-                    {/* <p>{job.companyName}{job.city && <div></div>}{job.city && job.city}{job.jobType && <div></div>}{job.jobType}</p>     */}
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                      }}
-                    >
-                      <p>
-                        {language === 'en'
-                          ? job.companyName
-                          : job.companyName_Ar}
-                        {job?.jobType && <div></div>}
-                        {job?.jobType}
-                      </p>
-                      <p>
-                        {new Date(job.lateDatetoApply).toLocaleDateString(
-                          'en-US',
-                          date_options,
-                        )}
-                      </p>
-                    </div>
-                    <p>{job?.cityName}</p>
-                  </li>
-                  <Link
-                    href={{
-                      pathname: `/singlejob/${job.jobVacancyID}`,
-                      query: { applyBtn: true, isApplied: job?.isApplied },
-                    }}
-                  >
-                    <li
-                      key={i}
-                      className={`${[
-                        Style.listItemJobs,
-                        i === current ? Style.itemActive : '',
-                      ].join(' ')} ${Style.mobile_jobs_listing}`}
-                      onClick={() => onSingleJobSelect(job, i)}
-                    >
-                      <strong>
-                        {language === 'en'
-                          ? job.lookUpValue
-                          : job.lookUpValue_Ar}
-                      </strong>
-                      {/* <p>{job.companyName}{job.city && <div></div>}{job.city && job.city}{job.jobType && <div></div>}{job.jobType}</p>     */}
-                      <p>
-                        {language === 'en'
-                          ? job.companyName
-                          : job.companyName_Ar}
-                        {job?.jobType && <div></div>}
-                        {job?.jobType}
-                      </p>
-                    </li>
-                  </Link>
-                </>
-              )
-            })
-          ) : (
-            <Empty description={t('data_not_found')} />
-          )}
+          {jobs?.map((job, i) => (
+            <>
+              <li
+                key={i}
+                className={`${[Style.listItemJobs, i === current ? Style.itemActive : ''].join(' ')} ${
+                  Style.desktop_jobs_listing
+                } ${StyleDashboard.overLay}`}
+                onClick={() => onSingleJobSelect(job, i)}
+              >
+                <strong>{language === 'en' ? job.lookUpValue : job.lookUpValue_Ar}</strong>
+                {/* <p>{job.companyName}{job.city && <div></div>}{job.city && job.city}{job.jobType && <div></div>}{job.jobType}</p>     */}
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <p>
+                    {language === 'en' ? job.companyName : job.companyName_Ar}
+                    {job?.jobType && <div></div>}
+                    {job?.jobType}
+                  </p>
+                  <p>{new Date(job.lateDatetoApply).toLocaleDateString('en-US', date_options)}</p>
+                </div>
+                <p>{job?.cityName}</p>
+              </li>
+              <Link
+                href={{
+                  pathname: `/singlejob/${job.jobVacancyID}`,
+                  query: { applyBtn: true, isApplied: job?.isApplied },
+                }}
+              >
+                <li
+                  key={i}
+                  className={`${[Style.listItemJobs, i === current ? Style.itemActive : ''].join(' ')} ${
+                    Style.mobile_jobs_listing
+                  }`}
+                  onClick={() => onSingleJobSelect(job, i)}
+                >
+                  <strong>{language === 'en' ? job.lookUpValue : job.lookUpValue_Ar}</strong>
+                  {/* <p>{job.companyName}{job.city && <div></div>}{job.city && job.city}{job.jobType && <div></div>}{job.jobType}</p>     */}
+                  <p>
+                    {language === 'en' ? job.companyName : job.companyName_Ar}
+                    {job?.jobType && <div></div>}
+                    {job?.jobType}
+                  </p>
+                </li>
+              </Link>
+            </>
+          ))}
         </ul>
       </div>
     </div>
