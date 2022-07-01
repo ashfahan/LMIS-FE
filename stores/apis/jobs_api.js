@@ -57,7 +57,7 @@ export const getLookupTableValue = async (typeID) => {
 }
 
 export const getDraftJobs = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Job/GetAllJobVacancy_Draft`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Job/GetJobsByFilters`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
